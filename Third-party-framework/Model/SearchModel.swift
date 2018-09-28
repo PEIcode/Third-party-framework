@@ -25,6 +25,8 @@ class SearchModel: NSObject {
     /// 每页个数
     var per_page :Int = 10
     
+    /// 顶部配菜列表（这里不需要）
+    var about_ingredient: String = "about_ingredient"
     var dict: [String :Any]{
         return ["keyword":keyword,"page":page,"per_page":per_page]
     }
@@ -40,5 +42,38 @@ class SearchModel: NSObject {
         self.keyword = keyword
         self.page = page
         self.per_page = per_page
+    }
+}
+class cellItems: NSObject {
+//    "item_type" : "1",
+//    "img" : "http:\/\/s1.st.meishij.net\/r\/26\/238\/1309526\/s1309526_12003.jpg?imageMogr2\/gravity\/Center\/crop\/328x328",
+//    "label" : [
+//    {
+//    "name" : "家常菜",
+//    "desc" : "天涯海角最念的味道"
+//    }
+//    ],
+//    "id" : "602359",
+//    "viewed_amount" : "379421",
+//    "title" : "水煮豆腐",
+//    "author" : {
+//    "id" : "1309526",
+//    "nickname" : "乐悠厨房",
+//    "avatar_url" : "http:\/\/s1.st.meishij.net\/user\/26\/238\/st1309526_149731666855550.jpg"
+//    },
+//    "context" : {
+//    "scene_id" : "10001",
+//    "trace_id" : "ali#1111",
+//    "item_type" : "recipe"
+//    },
+//    "rate" : "5",
+//    "favor_amount" : "25397"
+    
+    ///结果列表可以显示（配图、点赞数、title）
+    var img: String?
+    var title: String?
+    init(jsonData:JSON){
+        self.img = jsonData["img"].stringValue
+        self.title = jsonData["title"].stringValue
     }
 }
