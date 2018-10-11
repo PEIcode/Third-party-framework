@@ -69,9 +69,10 @@ class cellItems: NSObject {
 //    "rate" : "5",
 //    "favor_amount" : "25397"
     
-    ///结果列表可以显示（配图、点赞数、title）
+    ///目前只需要 title 和 img 和 id。结果列表可以显示（配图、点赞数、title）
     var img: String?
     var title: String?
+    var id: String?
     init(jsonData:JSON){
         self.img = jsonData["img"].stringValue
         self.title = jsonData["title"].stringValue

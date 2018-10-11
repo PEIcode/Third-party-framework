@@ -125,6 +125,7 @@ extension ViewController{
             components += URLEncoding.default.queryComponents(fromKey: key, value: value)
         }
         return components.map { "\($0)=\($1)" }.joined(separator: "&")
+       
     }
     
     func useURLSession() {
@@ -142,6 +143,8 @@ extension ViewController{
         let session = URLSession.init(configuration: config)
         
         let task = session.dataTask(with: request) { (data, responce, error) in
+            
+            
             //            print(data ?? "NO data",responce ?? "mei" ,error ?? "请求👌")
             let json = try? JSONSerialization.jsonObject(with: data!, options: [])
             //            print(json!)

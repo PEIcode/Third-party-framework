@@ -26,6 +26,7 @@ class ResultViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.rowHeight = 120
         view.addSubview(tableView)
         
         searchViewModel.delegate = self
@@ -57,7 +58,7 @@ extension ResultViewController: UITableViewDelegate,UITableViewDataSource,PSSear
         let model = searchViewModel.resultItems[indexPath.row] as! Dictionary<String,Any>
         cell?.textLabel?.text = model["title"] as? String
         let iconStr = model["img"] as? String
-        print(iconStr!)
+//        print(iconStr!)
         //        let iconUrl = NSURL.init(string: iconStr!)
         let url = URL.init(string: iconStr!)
         //        let data = NSData.init(contentsOfFile: )
@@ -65,10 +66,21 @@ extension ResultViewController: UITableViewDelegate,UITableViewDataSource,PSSear
         //        let img = UIImage.init(data:data2!)
         //
         //        设置cell的imageView
-        cell?.imageView?.sd_setImage(with: url!, completed: nil)
+//        cell?.imageView?.sd_setImage(with: url!, completed: nil)
+        cell?.imageView?.sd_setImage(with: url!, placeholderImage: nil, options:.cacheMemoryOnly, completed: nil)
         return cell!
     }
     func fetchDataFinish() {
         tableView.reloadData()
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailVc = DetailSearchController()
+        let cell = tableView.cellForRow(at: indexPath)!
+//        tableView.cellForRow(at: indexPath)
+        let model = searchViewModel.resultItems[indexPath.row] as! Dictionary<String,Any>
+        detailVc.str = cell.textLabel?.text
+        detailVc.id = model["id"] as? String
+        present(detailVc, animated: true, completion: nil)
+        
     }
 }
