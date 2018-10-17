@@ -13,7 +13,8 @@ class DetailModel: NSObject {
     var title: String = ""
     var pic_urls: [pic] = []
     var content: String = ""
-    
+    var cellHeight: CGFloat = 0
+    var iconHeigt: CGFloat = 0
     init?(json: JSON) {
         if json.isEmpty{
             return nil
@@ -22,6 +23,16 @@ class DetailModel: NSObject {
         self.title = json["title"].stringValue
         self.pic_urls = json["pic_urls"].arrayValue.map(pic.init)
         self.content = json["content"].stringValue
+        super.init()
+        let contentHeight = self.getNormalStrH(str: content, strFont: 17, w: UIScreen.main.bounds.size.width)
+        if self.pic_urls.count != 0 {
+            let imgHeight = CGFloat( self.pic_urls[0].height)
+            let imgWidth = CGFloat(self.pic_urls[0].width)
+            iconHeigt = UIScreen.main.bounds.width * imgHeight/imgWidth
+        }
+        
+        self.cellHeight = contentHeight + 25 + iconHeigt
+        
     }
     init(id: String = "", title: String, pic_urls: [pic], content: String) {
         self.id = id
@@ -29,9 +40,23 @@ class DetailModel: NSObject {
         self.pic_urls = pic_urls
         self.content = content
     }
-    var height: Float {
+    
+    func getNormalStrH(str: String, strFont: CGFloat, w: CGFloat) -> CGFloat {
+        return getNormalStrSize(str: str, font: strFont, w: w, h: CGFloat.greatestFiniteMagnitude).height
+    }
+    
+    private func getNormalStrSize(str: String? = nil, attriStr: NSMutableAttributedString? = nil, font: CGFloat, w: CGFloat, h: CGFloat) -> CGSize {
+        if str != nil {
+            let strSize = (str! as NSString).boundingRect(with: CGSize(width: w, height: h), options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: font)], context: nil).size
+            return strSize
+        }
         
-        return 200.0
+        if attriStr != nil {
+            let strSize = attriStr!.boundingRect(with: CGSize(width: w, height: h), options: .usesLineFragmentOrigin, context: nil).size
+            return strSize
+        }
+        
+        return CGSize.zero
     }
 }
 class pic: Codable {

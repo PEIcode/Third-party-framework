@@ -22,7 +22,7 @@
                                 <rect key="frame" x="152" y="228" width="100" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.51017791032785098" green="0.57189352318406717" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="搜索🔍">
+                                <state key="normal" title="🔍美食搜索">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>

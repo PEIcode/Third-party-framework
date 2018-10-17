@@ -21,27 +21,42 @@ class PSStepCell: UITableViewCell {
                 return
             }
             titleLab.text = model.title
+            contentLab.text = model.content
             let imgURL =  model.pic_urls[0].big
+//            print(imgURL,URL(string: imgURL))
+            let url = URL.init(string: imgURL)
+            iconView.contentMode = .scaleAspectFill
+            iconView.sd_setImage(with: url!, completed: nil)
+            // 计算高度
+//            let contentSize = CGSize.init(width: <#T##CGFloat#>, height: <#T##CGFloat#>)
+            let contentFrame = self.contentLab.sizeThatFits(CGSize(width: self.contentLab.frame.width, height: CGFloat(MAXFLOAT)))
+//            print(contentFrame.height)
+            let imgHeight = CGFloat(model.pic_urls[0].height)
+            let imgWidth = CGFloat(model.pic_urls[0].width)
+            let iconheigt = UIScreen.main.bounds.width * imgHeight/imgWidth
             
-            iconView.sd_setImage(with: URL(string: imgURL), completed: nil)
+            iconHeigtConstraint.constant = iconheigt
+            
+            model.cellHeight = contentFrame.height + iconheigt + 25.0
+//            print(model.cellHeight!)
         }
     }
-    var height: Float {
-        return detailmodel!.height + 33;
-    }
     
-//    var detaiModel: DetailModel = DetailModel()
-//    var detailViewModel: DetailSearchViewModel = DetailSearchViewModel()
+    var height: CGFloat{
+        return (detailmodel?.cellHeight)!
+    }
+    func cellHeightWithModel(model: DetailModel){
+//        let mo = model;
+//        var sizeFrame = self.frame
+//        sizeFrame.size.height = model.cellHeight!
+//        self.frame
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-//    func setDetailModel(detailVModel:DetailSearchViewModel) {
-//        detailViewModel = detailVModel
-////        titleLab.text = detailVModel.
-//    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

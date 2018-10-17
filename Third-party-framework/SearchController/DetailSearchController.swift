@@ -30,9 +30,13 @@ class DetailSearchController: UIViewController {
     
     /// 设置UI
     func setupUI(){
+        
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UINib(nibName: "PSStepCell", bundle: nil), forCellReuseIdentifier: stepCellID)
+//        tableView.register(UINib(nibName: "PSStepCell", bundle: nil), forCellReuseIdentifier: stepCellID)
+//        tableView.estimatedRowHeight = 300
+//        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.separatorStyle = .none
         let lab = UILabel.init()
         view.addSubview(lab)
         lab.backgroundColor = #colorLiteral(red: 1, green: 0.5115470886, blue: 0, alpha: 1)
@@ -66,12 +70,12 @@ extension DetailSearchController: DetailSearchViewModelDelegate,UITableViewDeleg
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return detailViewModel.resultItems.count
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let model = detailViewModel.resultSteps[indexPath.row]
-//        let cell = tableView.cellForRow(at: indexPath)
-        
-        return CGFloat(model.height)
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        let model = detailViewModel.resultSteps[indexPath.row]
+////        let cell = tableView.cellForRow(at: indexPath)
+//        print(model.cellHeight!)
+//        return model.cellHeight!
+//    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
 //        let cellID = "detailCell"
 //        var cell = tableView.dequeueReusableCell(withIdentifier: cellID)
@@ -80,9 +84,22 @@ extension DetailSearchController: DetailSearchViewModelDelegate,UITableViewDeleg
 //        }
 //        return cell!
         let stepModel = detailViewModel.resultSteps[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: stepCellID) as? PSStepCell
+        var cell = tableView.dequeueReusableCell(withIdentifier: stepCellID) as? PSTableViewCell
+        if cell == nil {
+//            cell = Bundle.main.loadNibNamed("PSStepCell", owner: self, options: nil)?.last as! PSStepCell
+            cell = PSTableViewCell.init(style: .default, reuseIdentifier: stepCellID)
+        }
         cell?.detailmodel = stepModel
+        cell?.setFrameWithModel(model: stepModel)
+        print("qqqqqqqqqqqqq\(cell?.frame.height ?? 111)")
         return cell!
     }
-    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let model = detailViewModel.resultSteps[indexPath.row]
+
+        return model.cellHeight
+    }
 }
