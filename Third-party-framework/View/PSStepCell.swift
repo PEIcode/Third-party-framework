@@ -23,12 +23,10 @@ class PSStepCell: UITableViewCell {
             titleLab.text = model.title
             contentLab.text = model.content
             let imgURL =  model.pic_urls[0].big
-//            print(imgURL,URL(string: imgURL))
             let url = URL.init(string: imgURL)
             iconView.contentMode = .scaleAspectFill
             iconView.sd_setImage(with: url!, completed: nil)
             // 计算高度
-//            let contentSize = CGSize.init(width: <#T##CGFloat#>, height: <#T##CGFloat#>)
             let contentFrame = self.contentLab.sizeThatFits(CGSize(width: self.contentLab.frame.width, height: CGFloat(MAXFLOAT)))
 //            print(contentFrame.height)
             let imgHeight = CGFloat(model.pic_urls[0].height)
@@ -38,7 +36,6 @@ class PSStepCell: UITableViewCell {
             iconHeigtConstraint.constant = iconheigt
             
             model.cellHeight = contentFrame.height + iconheigt + 25.0
-//            print(model.cellHeight!)
         }
     }
     
