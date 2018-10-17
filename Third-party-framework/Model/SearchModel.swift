@@ -38,11 +38,11 @@ class SearchModel: NSObject {
         self.page = json["page"].intValue
         self.per_page = json["per_page"].intValue
     }
-    init(keyword :String, page :Int = 1, per_page :Int = 10) {
-        self.keyword = keyword
-        self.page = page
-        self.per_page = per_page
-    }
+//    init(keyword :String, page :Int = 1, per_page :Int = 10) {
+//        self.keyword = keyword
+//        self.page = page
+//        self.per_page = per_page
+//    }
 }
 class cellItems: NSObject {
 //    "item_type" : "1",

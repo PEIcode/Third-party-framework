@@ -70,19 +70,7 @@ extension DetailSearchController: DetailSearchViewModelDelegate,UITableViewDeleg
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return detailViewModel.resultItems.count
     }
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        let model = detailViewModel.resultSteps[indexPath.row]
-////        let cell = tableView.cellForRow(at: indexPath)
-//        print(model.cellHeight!)
-//        return model.cellHeight!
-//    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-//        let cellID = "detailCell"
-//        var cell = tableView.dequeueReusableCell(withIdentifier: cellID)
-//        if cell == nil {
-//            cell = UITableViewCell.init(style: .default, reuseIdentifier: cellID)
-//        }
-//        return cell!
         let stepModel = detailViewModel.resultSteps[indexPath.row]
         var cell = tableView.dequeueReusableCell(withIdentifier: stepCellID) as? PSTableViewCell
         if cell == nil {
@@ -90,16 +78,54 @@ extension DetailSearchController: DetailSearchViewModelDelegate,UITableViewDeleg
             cell = PSTableViewCell.init(style: .default, reuseIdentifier: stepCellID)
         }
         cell?.detailmodel = stepModel
-        cell?.setFrameWithModel(model: stepModel)
-        print("qqqqqqqqqqqqq\(cell?.frame.height ?? 111)")
+        cell?.setFrameWithModel()
+        cell?.delegate = self
+        print(cell?.iconView.frame.height)
         return cell!
     }
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        let model = detailViewModel.resultSteps[indexPath.row]
 //
+//        return model.cellHeight
 //    }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let model = detailViewModel.resultSteps[indexPath.row]
-
-        return model.cellHeight
+}
+extension DetailSearchController: PSTableViewCellDelegate{
+    func iconViewDidSelect() {
+        //进入新的控制器
+//        let BrowseVc = BrowseViewController.init(imageCounts: <#T##NSArray#>, currentIndexP: <#T##IndexPath#>)
+        
     }
 }
+//extension DetailSearchController: BrowsePresentDelegate{
+//    func imageForPresent(indexPath: IndexPath) -> UIImageView {
+//        let imageV = UIImageView()
+//        imageV.contentMode = .scaleAspectFill
+//        imageV.clipsToBounds = true
+//        //设置图片
+//        let imageIndex = imageVM.imageArray[indexPath.row] as! String
+//        imageV.image = UIImage(named: imageIndex)
+//        return imageV
+//        
+//    }
+//    
+//    func startImageRectForPresent(indexPath: IndexPath) -> CGRect {
+//        // 这里直接取得cell的frame，不是图片的frame
+//        // 1.取出cell
+//        guard let cell = collectionView?.cellForItem(at: indexPath) else {
+//            return CGRect(x: collectionView!.bounds.width * 0.5, y: kScreenHeight + 50, width: 0, height: 0)
+//        }
+//        
+//        // 2.计算转化为UIWindow上时的frame
+//        return collectionView!.convert( cell.frame, to: UIApplication.shared.keyWindow)
+//    }
+//    
+//    func endImageRectForPresent(indexPath: IndexPath) -> CGRect {
+//        let imageIndex = imageVM.imageArray[indexPath.row]
+//        let icon = UIImage(named: imageIndex as! String)
+//        
+//        let imageH = kScreenWidth / (icon?.size.width)! * (icon?.size.height)!
+//        let y = imageH < kScreenHeight ? (kScreenHeight - imageH) / 2 : 0
+//        
+//        return CGRect(x: 0, y: y, width: kScreenWidth, height: imageH)
+//    }}
+

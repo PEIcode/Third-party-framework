@@ -15,6 +15,7 @@ class DetailModel: NSObject {
     var content: String = ""
     var cellHeight: CGFloat = 0
     var iconHeigt: CGFloat = 0
+    var contentHeight: CGFloat = 0
     init?(json: JSON) {
         if json.isEmpty{
             return nil
@@ -24,21 +25,15 @@ class DetailModel: NSObject {
         self.pic_urls = json["pic_urls"].arrayValue.map(pic.init)
         self.content = json["content"].stringValue
         super.init()
-        let contentHeight = self.getNormalStrH(str: content, strFont: 17, w: UIScreen.main.bounds.size.width)
+        contentHeight = self.getNormalStrH(str: content, strFont: 17, w: UIScreen.main.bounds.size.width)
         if self.pic_urls.count != 0 {
             let imgHeight = CGFloat( self.pic_urls[0].height)
             let imgWidth = CGFloat(self.pic_urls[0].width)
             iconHeigt = UIScreen.main.bounds.width * imgHeight/imgWidth
         }
         
-        self.cellHeight = contentHeight + 25 + iconHeigt
+        cellHeight = contentHeight + 25 + iconHeigt
         
-    }
-    init(id: String = "", title: String, pic_urls: [pic], content: String) {
-        self.id = id
-        self.title = title
-        self.pic_urls = pic_urls
-        self.content = content
     }
     
     func getNormalStrH(str: String, strFont: CGFloat, w: CGFloat) -> CGFloat {
@@ -62,11 +57,6 @@ class DetailModel: NSObject {
 class pic: Codable {
     let big: String
     let width,height: Int
-    init(big: String, width: Int, height: Int) {
-        self.big = big
-        self.width = width
-        self.height = height
-    }
     init(_ json: JSON) {
         self.big = json["big"].stringValue
         self.width = json["width"].intValue
