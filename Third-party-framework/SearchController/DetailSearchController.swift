@@ -11,12 +11,31 @@ import SnapKit
 
 class DetailSearchController: UIViewController {
 
-    
+    fileprivate lazy var photoAnimation = PhotoAnimation()
     var titleLabel: UILabel?
     var str: String?
     var id: String?
     var detailViewModel = DetailSearchViewModel()
-    
+    var imageArray: Array<pic>{
+        let imgArray: NSMutableArray = []
+        for a  in self.detailViewModel.resultSteps {
+            if a.pic_urls.count != 0 {
+//                print(a.pic_urls)
+                imgArray.add(a.pic_urls[0])
+            }
+        }
+        print(imgArray)
+        return imgArray as! Array<pic>
+    }
+    var picArray: NSMutableArray{
+        let imgA: NSMutableArray = []
+        for a in imageArray{
+            let b = a.big
+            imgA.add(b)
+        }
+//        print(imgA)
+        return imgA
+    }
     let stepCellID = "stepCellID"
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
@@ -80,7 +99,7 @@ extension DetailSearchController: DetailSearchViewModelDelegate,UITableViewDeleg
         cell?.detailmodel = stepModel
         cell?.setFrameWithModel()
         cell?.delegate = self
-        print(cell?.iconView.frame.height)
+//        print(cell?.iconView.frame.height)
         return cell!
     }
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -88,44 +107,66 @@ extension DetailSearchController: DetailSearchViewModelDelegate,UITableViewDeleg
 //
 //        return model.cellHeight
 //    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        print(indexPath)
+//        print(imageArray[indexPath.row])
+        let BrowseVc = BrowseViewController.init(imageCounts: picArray, currentIndexP: indexPath, imageInfoArray: imageArray)
+        //设置自定义modal
+        BrowseVc.modalPresentationStyle = .custom
+        BrowseVc.transitioningDelegate = photoAnimation
+        photoAnimation.setProperty(indPath: indexPath, self as BrowsePresentDelegate, BrowseVc as BrowseDismissDelegate)
+        present(BrowseVc, animated: true, completion: nil)
+    }
 }
 extension DetailSearchController: PSTableViewCellDelegate{
     func iconViewDidSelect() {
         //进入新的控制器
-//        let BrowseVc = BrowseViewController.init(imageCounts: <#T##NSArray#>, currentIndexP: <#T##IndexPath#>)
+//        let imgArray: NSMutableArray = []
+//        for a  in detailViewModel.resultSteps {
+//            print(a)
+//            if a.pic_urls.count != 0 {
+//                imgArray.add(a.pic_urls[0])
+//            }
+//        }
+//        let BrowseVc = BrowseViewController.init(imageCounts: imgArray, currentIndexP: <#T##IndexPath#>)
         
     }
 }
-//extension DetailSearchController: BrowsePresentDelegate{
-//    func imageForPresent(indexPath: IndexPath) -> UIImageView {
-//        let imageV = UIImageView()
-//        imageV.contentMode = .scaleAspectFill
-//        imageV.clipsToBounds = true
-//        //设置图片
-//        let imageIndex = imageVM.imageArray[indexPath.row] as! String
+extension DetailSearchController: BrowsePresentDelegate{
+    func imageForPresent(indexPath: IndexPath) -> UIImageView {
+        let imageV = UIImageView()
+        imageV.contentMode = .scaleAspectFill
+        imageV.clipsToBounds = true
+        //设置图片
+//        let imageIndex = imageArray[indexPath.row] as! String
 //        imageV.image = UIImage(named: imageIndex)
-//        return imageV
-//        
-//    }
-//    
-//    func startImageRectForPresent(indexPath: IndexPath) -> CGRect {
-//        // 这里直接取得cell的frame，不是图片的frame
-//        // 1.取出cell
-//        guard let cell = collectionView?.cellForItem(at: indexPath) else {
+        let imgURL = picArray[indexPath.row] as! String
+        imageV.sd_setImage(with: URL.init(string: imgURL), completed: nil)
+        return imageV
+        
+    }
+    
+    func startImageRectForPresent(indexPath: IndexPath) -> CGRect {
+        // 这里直接取得cell的frame，不是图片的frame
+        // 1.取出cell
+        guard let cell = tableView?.cellForRow(at: indexPath) else {
 //            return CGRect(x: collectionView!.bounds.width * 0.5, y: kScreenHeight + 50, width: 0, height: 0)
-//        }
-//        
-//        // 2.计算转化为UIWindow上时的frame
-//        return collectionView!.convert( cell.frame, to: UIApplication.shared.keyWindow)
-//    }
-//    
-//    func endImageRectForPresent(indexPath: IndexPath) -> CGRect {
-//        let imageIndex = imageVM.imageArray[indexPath.row]
+            return CGRect(x: tableView.bounds.width * 0.5, y: kScreenHeight, width: 0, height: 0)
+        }
+        
+        // 2.计算转化为UIWindow上时的frame
+        return tableView!.convert( cell.frame, to: UIApplication.shared.keyWindow)
+    }
+    
+    func endImageRectForPresent(indexPath: IndexPath) -> CGRect {
+//        let imageIndex = pic[indexPath.row]
 //        let icon = UIImage(named: imageIndex as! String)
-//        
-//        let imageH = kScreenWidth / (icon?.size.width)! * (icon?.size.height)!
-//        let y = imageH < kScreenHeight ? (kScreenHeight - imageH) / 2 : 0
-//        
-//        return CGRect(x: 0, y: y, width: kScreenWidth, height: imageH)
-//    }}
+        let imgW = imageArray[indexPath.row].width
+        let imgH = imageArray[indexPath.row].height
+        
+        let imageH = kScreenWidth/CGFloat(imgW * imgH)
+        let y = imageH < kScreenHeight ? (kScreenHeight - imageH) / 2 : 0
+        
+        return CGRect(x: 0, y: y, width: kScreenWidth, height: imageH)
+    }}
 

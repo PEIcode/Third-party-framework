@@ -46,7 +46,7 @@ class DetailSearchViewModel: NSObject {
                 //                print(json["data"].dictionary ?? "oo")
                 let dataDict = json["data"].dictionary
                 let itemsArray = dataDict?["cook_steps"]?.arrayObject
-                            print(itemsArray!)
+//                            print(itemsArray!)
                             
                 let detailMS = json["data"]["cook_steps"].arrayValue.flatMap(DetailModel.init)
                             
@@ -54,7 +54,7 @@ class DetailSearchViewModel: NSObject {
                     self.resultSteps.append(detailM)
                 }
                 
-                print(self.resultSteps)
+//                print(self.resultSteps)
 //                detailModel = itemsArray.map(DetailModel.init)
                 //                    let itemsArray = json["data"]["items"].arrayObject
                 //                    print(itemsArray!)

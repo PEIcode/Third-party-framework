@@ -15,15 +15,17 @@ class BrowseViewController: UIViewController{
     fileprivate var currentIndex : IndexPath = []
     fileprivate var imageArray: NSArray
     fileprivate var pageCtr: BrowsePageControl?
+    fileprivate var imgInfoArray: Array<pic> = []
+    fileprivate var currentURL: URL?
     ///自定义CollectionViewlayout
     fileprivate lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: PhotoCollectionViewLayout())
     //构造方法
-    init(imageCounts:NSArray,currentIndexP:IndexPath) {
+    init(imageCounts: NSArray, currentIndexP: IndexPath, imageInfoArray: Array<pic>) {
         currentIndex = currentIndexP
         imageArray = imageCounts
+        imgInfoArray = imageInfoArray
         super.init(nibName: nil, bundle: nil)
     }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -72,10 +74,13 @@ extension BrowseViewController: UICollectionViewDataSource{
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCellID, for: indexPath) as? BrowseCollectionViewCell else {
             return UICollectionViewCell()
         }
+        //取出对应图片的url
         let imageIndex = imageArray[indexPath.row]
-        let icon = UIImage(named: imageIndex as! String)
-        cell.imageView.image = icon
+//        let icon = UIImage(named: imageIndex as! String)
+//        cell.imageView.image = icon
+        cell.imageView.sd_setImage(with: URL.init(string: imageIndex as! String), completed: nil);
         cell.imgIndex = (imageIndex as! String)
+        cell.imageInfo = imgInfoArray[indexPath.row]
         cell.delegate = self
         return cell
     }

@@ -26,9 +26,22 @@ class BrowseCollectionViewCell: UICollectionViewCell {
     //MARK:- 懒加载
     lazy var imageView = UIImageView()
     lazy var scrollView = UIScrollView()
+    
+    /// 计算服务端返回图片的大小
+    var imageInfo: pic?{
+        didSet{
+            // 计算imageView的尺寸
+            calculateImageViewFrame()
+        }
+    }
+    
     ///
     //    let iconModel: imageModel?
-    var url: URL?
+    var url: String? {
+        didSet{
+            
+        }
+    }
     ///
     var avplayer: AVPlayer?
     ///
@@ -42,8 +55,9 @@ class BrowseCollectionViewCell: UICollectionViewCell {
     /// 传入的图片名字
     var imgIndex: String? {
         didSet{
-            let image = UIImage(named: imgIndex!)
-            calculateImageFrame(image: image!)
+//            let image = UIImage(named: imgIndex!)
+//            calculateImageFrame(image: image!)
+            
         }
     }
     /// 代理属性
@@ -106,6 +120,21 @@ extension BrowseCollectionViewCell{
         let pan = UIPanGestureRecognizer(target: self, action: #selector(panPhotoBrowser(_:)))
         pan.delegate = self as UIGestureRecognizerDelegate
         scrollView.addGestureRecognizer(pan)
+        
+        
+    }
+    func calculateImageViewFrame(){
+        let imageH = CGFloat((imageInfo?.height)! / (imageInfo?.width)!) * kScreenWidth
+        imageView.bounds = CGRect(x: 0, y: 0, width: kScreenWidth, height: imageH)
+        scrollView.contentSize = CGSize(width: kScreenWidth, height: imageH)
+        //判断是长图还是短图
+        if imageH < kScreenHeight {
+            imageView.center = CGPoint(x: kScreenWidth * 0.5, y: kScreenHeight * 0.5)
+        }else{
+            
+            imageView.center = CGPoint(x: kScreenWidth * 0.5, y: imageH * 0.5-topInsetForScr)
+        }
+        
     }
     /// 计算imageView的尺寸
     ///

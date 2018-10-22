@@ -16,7 +16,7 @@ class PSTableViewCell: UITableViewCell {
     var titleLab: UILabel!
     var iconView: UIImageView!
     var contentLab: UILabel!
-    var iconViewHeight: CGFloat = 150
+    var iconViewHeight: CGFloat = 0
     var contentLabHeight: CGFloat = 0
     let titleLabHeigt: CGFloat = 25.0
     var imgURL: String = ""
@@ -48,11 +48,6 @@ class PSTableViewCell: UITableViewCell {
         self.setupUI()
         let contentSize = self.contentLab .sizeThatFits(CGSize.init(width: UIScreen.main.bounds.width, height: CGFloat(MAXFLOAT)))
         contentLabHeight = contentSize.height
-//        if detailmodel.pic_urls.count != 0 {
-//            let imgHeight = CGFloat( self.pic_urls[0].height)
-//            let imgWidth = CGFloat(self.pic_urls[0].width)
-//            iconHeigt = UIScreen.main.bounds.width * imgHeight/imgWidth
-//        }
     }
     func setupUI() {
         titleLab = UILabel()
@@ -89,14 +84,12 @@ class PSTableViewCell: UITableViewCell {
             make.height.equalTo(self.iconViewHeight)
             make.top.equalTo(self.titleLab.snp.bottom).offset(5)
             make.bottom.equalTo(self.contentLab.snp.top)
-//            make.height.greaterThanOrEqualTo(self.iconViewHeight)
         }
         contentLab.snp.makeConstraints { (make) in
             make.top.equalTo(self.iconView.snp.bottom)
             make.bottom.equalToSuperview().offset(2)
             make.left.equalToSuperview().offset(0)
             make.right.equalToSuperview().offset(0)
-//                        make.height.equalTo(self.contentLabHeight)
         }
     }
     
