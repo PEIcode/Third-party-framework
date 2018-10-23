@@ -124,7 +124,7 @@ extension BrowseCollectionViewCell{
         
     }
     func calculateImageViewFrame(){
-        let imageH = CGFloat((imageInfo?.height)! / (imageInfo?.width)!) * kScreenWidth
+        let imageH = CGFloat((imageInfo?.height)!)/CGFloat((imageInfo?.width)!) * kScreenWidth
         imageView.bounds = CGRect(x: 0, y: 0, width: kScreenWidth, height: imageH)
         scrollView.contentSize = CGSize(width: kScreenWidth, height: imageH)
         //判断是长图还是短图
@@ -233,8 +233,10 @@ extension BrowseCollectionViewCell{
     }
     private func endPan() {
         self.superview?.alpha = 1.0
-        let image = UIImage(named: imgIndex!)
-        let scale = (image?.size.height)! / (image?.size.width)!
+//        let image = UIImage(named: imgIndex!)
+//        let scale = (image?.size.height)! / (image?.size.width)!
+        
+        let scale = CGFloat((imageInfo?.height)!) / CGFloat((imageInfo?.width)!)
         let width = scrollView.bounds.size.width - PicMargin
         let size = CGSize(width: width, height: width * scale)
         let needResetSize = imageView.bounds.size.width < size.width || imageView.bounds.size.height < size.height

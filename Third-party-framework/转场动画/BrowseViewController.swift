@@ -105,7 +105,9 @@ extension BrowseViewController: BrowseDismissDelegate{
             return UIImageView()
         }
         imageV.image = cell.imageView.image
-        imageV.frame = cell.scrollView.convert(cell.imageView.frame, to: UIApplication.shared.keyWindow)
+        let imageVFrame = CGRect(x: 0, y:cell.frame.origin.y + 25 , width: kScreenWidth, height: cell.imageView.frame.size.height)
+        imageV.frame = cell.scrollView.convert(imageVFrame, to: UIApplication.shared.keyWindow)
+//        imageV.frame = cell.scrollView.convert(cell.imageView.frame, to: UIApplication.shared.keyWindow)
         return imageV
     }
     

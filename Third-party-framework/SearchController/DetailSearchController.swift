@@ -20,11 +20,9 @@ class DetailSearchController: UIViewController {
         let imgArray: NSMutableArray = []
         for a  in self.detailViewModel.resultSteps {
             if a.pic_urls.count != 0 {
-//                print(a.pic_urls)
                 imgArray.add(a.pic_urls[0])
             }
         }
-        print(imgArray)
         return imgArray as! Array<pic>
     }
     var picArray: NSMutableArray{
@@ -33,9 +31,9 @@ class DetailSearchController: UIViewController {
             let b = a.big
             imgA.add(b)
         }
-//        print(imgA)
         return imgA
     }
+//    var imageH: CGFloat = 0
     let stepCellID = "stepCellID"
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
@@ -147,26 +145,32 @@ extension DetailSearchController: BrowsePresentDelegate{
     }
     
     func startImageRectForPresent(indexPath: IndexPath) -> CGRect {
-        // 这里直接取得cell的frame，不是图片的frame
         // 1.取出cell
         guard let cell = tableView?.cellForRow(at: indexPath) else {
 //            return CGRect(x: collectionView!.bounds.width * 0.5, y: kScreenHeight + 50, width: 0, height: 0)
             return CGRect(x: tableView.bounds.width * 0.5, y: kScreenHeight, width: 0, height: 0)
         }
         
+        let imgW = CGFloat(imageArray[indexPath.row].width)
+        let imgH = CGFloat(imageArray[indexPath.row].height)
+        let imageH = kScreenWidth * imgH/imgW
+
+        let imageVFrame = CGRect(x: 0, y: cell.frame.origin.y+25, width: kScreenWidth, height:imageH )
+        return tableView!.convert( imageVFrame, to: UIApplication.shared.keyWindow)
+
         // 2.计算转化为UIWindow上时的frame
-        return tableView!.convert( cell.frame, to: UIApplication.shared.keyWindow)
+//        return tableView!.convert( cell.frame, to: UIApplication.shared.keyWindow)
     }
     
     func endImageRectForPresent(indexPath: IndexPath) -> CGRect {
 //        let imageIndex = pic[indexPath.row]
 //        let icon = UIImage(named: imageIndex as! String)
-        let imgW = imageArray[indexPath.row].width
-        let imgH = imageArray[indexPath.row].height
-        
-        let imageH = kScreenWidth/CGFloat(imgW * imgH)
+        let imgW = CGFloat(imageArray[indexPath.row].width)
+        let imgH = CGFloat(imageArray[indexPath.row].height)
+        let imageH = kScreenWidth * CGFloat (imgH/imgW)
         let y = imageH < kScreenHeight ? (kScreenHeight - imageH) / 2 : 0
         
         return CGRect(x: 0, y: y, width: kScreenWidth, height: imageH)
+        
     }}
 
