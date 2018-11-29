@@ -23,6 +23,7 @@ class DetailModel: NSObject {
         self.id = json["id"].stringValue
         self.title = json["title"].stringValue
         self.pic_urls = json["pic_urls"].arrayValue.map(pic.init)
+        print(pic_urls)
         self.content = json["content"].stringValue
         super.init()
         /**
@@ -57,13 +58,17 @@ class DetailModel: NSObject {
 //        return CGSize.zero
 //    }
 }
-class pic: Codable {
-    let big: String
-    let width,height: Int
+class pic {
+    var big: String = ""
+    var width: Int = 0
+    var height: Int = 0
     init(_ json: JSON) {
         self.big = json["big"].stringValue
         self.width = json["width"].intValue
         self.height = json["height"].intValue
+    }
+    init(big:String = "", width: Int = 0, height: Int = 0) {
+        
     }
 }
 /// 步骤参数

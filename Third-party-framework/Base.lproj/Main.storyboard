@@ -29,6 +29,24 @@
                                     <segue destination="BYZ-38-t0r" kind="modal" id="xUB-P6-jMn"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UB7-g0-pBv">
+                                <rect key="frame" x="152" y="353" width="100" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.28355094178082191" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="按钮"/>
+                                <connections>
+                                    <segue destination="5ga-iR-OJt" kind="modal" id="bSe-8M-SPB"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PqR-Fg-Tga">
+                                <rect key="frame" x="152" y="465" width="100" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.28355094180000001" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="测试"/>
+                                <connections>
+                                    <segue destination="sl3-OO-ixP" kind="modal" id="jkT-ia-1XT"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Ng1-kn-sOx"/>
@@ -36,7 +54,54 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HcZ-MT-GmZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-354" y="70"/>
+            <point key="canvasLocation" x="-354.39999999999998" y="69.715142428785612"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="QkH-MU-VvW">
+            <objects>
+                <viewController id="5ga-iR-OJt" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IMe-6Q-FI4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XFl-wU-8gx">
+                                <rect key="frame" x="26" y="49" width="323" height="570"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">• 上传中：视频正在上传                    
+• 上传失败：视频上传失败，可重新上传
+• 转码中：视频上传成功，正在转码
+• 转码失败：提交的视频文件无法转码，请换一台设备录制提交
+• 审核中：视频进入到审核列表，等待运营审核
+• 审核通过：视频符合要求，审核成功
+• 审核失败：视频不合要求，审核失败</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Omf-Ov-xBT"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xie-AE-3oq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="430" y="70"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="tio-GA-l5Q">
+            <objects>
+                <viewController id="sl3-OO-ixP" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6Qz-94-wa8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="4Oc-l9-gA5"/>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DeN-CL-eC2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="430" y="735"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -69,7 +134,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="393" y="70"/>
+            <point key="canvasLocation" x="430" y="-729"/>
         </scene>
     </scenes>
 </document>

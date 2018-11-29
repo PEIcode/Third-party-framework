@@ -124,16 +124,22 @@ extension BrowseCollectionViewCell{
         
     }
     func calculateImageViewFrame(){
-        let imageH = CGFloat((imageInfo?.height)!)/CGFloat((imageInfo?.width)!) * kScreenWidth
-        imageView.bounds = CGRect(x: 0, y: 0, width: kScreenWidth, height: imageH)
-        scrollView.contentSize = CGSize(width: kScreenWidth, height: imageH)
-        //判断是长图还是短图
-        if imageH < kScreenHeight {
-            imageView.center = CGPoint(x: kScreenWidth * 0.5, y: kScreenHeight * 0.5)
-        }else{
+        if imageInfo?.height == 0 {
             
-            imageView.center = CGPoint(x: kScreenWidth * 0.5, y: imageH * 0.5-topInsetForScr)
+            imageView.frame = CGRect(x: 0, y: 0, width: 0, height: 0);
+        }else{
+            let imageH = CGFloat((imageInfo?.height)!)/CGFloat((imageInfo?.width)!) * kScreenWidth
+            imageView.bounds = CGRect(x: 0, y: 0, width: kScreenWidth, height: imageH)
+            scrollView.contentSize = CGSize(width: kScreenWidth, height: imageH)
+            //判断是长图还是短图
+            if imageH < kScreenHeight {
+                imageView.center = CGPoint(x: kScreenWidth * 0.5, y: kScreenHeight * 0.5)
+            }else{
+                
+                imageView.center = CGPoint(x: kScreenWidth * 0.5, y: imageH * 0.5-topInsetForScr)
+            }
         }
+        
         
     }
     /// 计算imageView的尺寸

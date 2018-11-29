@@ -21,6 +21,10 @@ class DetailSearchController: UIViewController {
         for a  in self.detailViewModel.resultSteps {
             if a.pic_urls.count != 0 {
                 imgArray.add(a.pic_urls[0])
+            }else{
+                let p = pic()
+                
+                imgArray.add(p)
             }
         }
         return imgArray as! Array<pic>
@@ -33,13 +37,18 @@ class DetailSearchController: UIViewController {
         }
         return imgA
     }
+    //UIFPSLabel
+    var fpsLabel: UILabel?
+    var displayLink: CADisplayLink?
+    private var _lastTime: TimeInterval = 0
+    private var _count:Int = 0
 //    var imageH: CGFloat = 0
     let stepCellID = "stepCellID"
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        
+        setupFPSLabel()
         detailViewModel.delegate = self
         detailViewModel.id = id ?? "C"
         detailViewModel.fetchSearchDataList()
@@ -50,6 +59,7 @@ class DetailSearchController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        // 方式二：用xib，也是用的约束
 //        tableView.register(UINib(nibName: "PSStepCell", bundle: nil), forCellReuseIdentifier: stepCellID)
 //        tableView.estimatedRowHeight = 300
 //        tableView.rowHeight = UITableViewAutomaticDimension
@@ -69,6 +79,31 @@ class DetailSearchController: UIViewController {
         lab.text = str!
     }
     
+    /// 设置FPSLabel
+    func setupFPSLabel() {
+        fpsLabel = UILabel(frame: CGRect(x: 0, y: 60, width: 60, height: 20))
+        fpsLabel?.alpha = 0.7
+        fpsLabel?.textColor = UIColor.red
+        view.addSubview(fpsLabel!)
+        displayLink = CADisplayLink.init(target: self, selector: #selector(FPSlink(link:)))
+        displayLink?.add(to: RunLoop.current, forMode: .commonModes)
+    }
+    @objc func FPSlink(link: CADisplayLink) {
+        if _lastTime == 0 {
+            _lastTime = link.timestamp
+            return
+        }
+        _count += 1
+        let delta = link.timestamp - _lastTime
+        if delta < 1 {
+            return
+        }
+        
+        _lastTime = link.timestamp
+        let fps = Double(_count) / delta
+        _count = 0
+        fpsLabel?.text = "\(Int(fps+0.5))FPS"
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         dismiss(animated: true, completion: nil)
     }
@@ -106,12 +141,20 @@ extension DetailSearchController: DetailSearchViewModelDelegate,UITableViewDeleg
 //        return model.cellHeight
 //    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print(indexPath)
 //        print(imageArray[indexPath.row])
+        let cell = tableView.cellForRow(at: indexPath) as! PSTableViewCell
+        let imgHeig: CGFloat = 1.0
+        if cell.iconView.frame.size.height < imgHeig {
+            return
+        }
         let BrowseVc = BrowseViewController.init(imageCounts: picArray, currentIndexP: indexPath, imageInfoArray: imageArray)
+//        let imgURL = picArray[indexPath.row] as! String
+//        let a = URL(string: imgURL)
+//        let BrowseVc = BrowseViewController.init(imageCounts: picArray, currectURLs:imgURL , imageInfoArray: imageArray)
         //设置自定义modal
         BrowseVc.modalPresentationStyle = .custom
         BrowseVc.transitioningDelegate = photoAnimation
+        
         photoAnimation.setProperty(indPath: indexPath, self as BrowsePresentDelegate, BrowseVc as BrowseDismissDelegate)
         present(BrowseVc, animated: true, completion: nil)
     }
@@ -126,7 +169,7 @@ extension DetailSearchController: PSTableViewCellDelegate{
 //                imgArray.add(a.pic_urls[0])
 //            }
 //        }
-//        let BrowseVc = BrowseViewController.init(imageCounts: imgArray, currentIndexP: <#T##IndexPath#>)
+//        let BrowseVc = BrowseViewController.init(imageCounts: imgArray, currentIndexP: )
         
     }
 }

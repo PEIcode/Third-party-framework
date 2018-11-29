@@ -143,6 +143,7 @@
 		393E368F214F94F60063189B /* Third-party-framework */ = {
 			isa = PBXGroup;
 			children = (
+				39CE0C1621953CF70086D314 /* 图片加载框架 */,
 				39E0B03E2177245800ACAD39 /* 转场动画 */,
 				39F150FD215E25430009F729 /* SearchController */,
 				393E36C42150D9C50063189B /* ViewModel */,
@@ -191,6 +192,13 @@
 				39F15108215F5A5A0009F729 /* DetailSearchViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		39CE0C1621953CF70086D314 /* 图片加载框架 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "图片加载框架";
 			sourceTree = "<group>";
 		};
 		39E0B03E2177245800ACAD39 /* 转场动画 */ = {

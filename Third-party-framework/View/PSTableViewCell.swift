@@ -83,7 +83,7 @@ class PSTableViewCell: UITableViewCell {
             make.left.right.equalToSuperview()
             make.height.equalTo(self.iconViewHeight)
             make.top.equalTo(self.titleLab.snp.bottom).offset(5)
-            make.bottom.equalTo(self.contentLab.snp.top)
+//            make.bottom.equalTo(self.contentLab.snp.top)
         }
         contentLab.snp.makeConstraints { (make) in
             make.top.equalTo(self.iconView.snp.bottom)

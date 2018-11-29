@@ -49,10 +49,12 @@ class DetailSearchViewModel: NSObject {
 //                            print(itemsArray!)
                             
                 let detailMS = json["data"]["cook_steps"].arrayValue.flatMap(DetailModel.init)
-                            
-                for detailM in detailMS{
-                    self.resultSteps.append(detailM)
+                            let detailMS2 = json["data"]["cook_steps"].arrayValue.map(DetailModel.init)
+//                            print(detailMS2)
+                for detailM in detailMS2{
+                    self.resultSteps.append(detailM!)
                 }
+                            print(self.resultSteps)
                 
 //                print(self.resultSteps)
 //                detailModel = itemsArray.map(DetailModel.init)

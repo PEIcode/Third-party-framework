@@ -16,7 +16,8 @@ class BrowseViewController: UIViewController{
     fileprivate var imageArray: NSArray
     fileprivate var pageCtr: BrowsePageControl?
     fileprivate var imgInfoArray: Array<pic> = []
-    fileprivate var currentURL: URL?
+    fileprivate var currentURL: String = ""
+    var currentRow: Int = 0
     ///自定义CollectionViewlayout
     fileprivate lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: PhotoCollectionViewLayout())
     //构造方法
@@ -26,6 +27,23 @@ class BrowseViewController: UIViewController{
         imgInfoArray = imageInfoArray
         super.init(nibName: nil, bundle: nil)
     }
+    // 通过url访问 现在要根据URL 来计算在对应数组的 下标  所有 currentIndex都要代替
+//    init(imageCounts:NSArray, currectURLs: String, imageInfoArray: Array<pic>){
+//        currentURL = currectURLs
+//        imageArray = imageCounts
+//        imgInfoArray = imageInfoArray
+//
+//        for (index,value) in imageCounts.enumerated() {
+//            print("\(index)\(value)")
+//
+//            if currectURLs == String(describing: value){
+//                currentIndex = [0,index]
+//                print(currentIndex)
+//            }
+//        }
+//        print(imageArray)
+//        super.init(nibName: nil, bundle: nil)
+//    }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -104,10 +122,10 @@ extension BrowseViewController: BrowseDismissDelegate{
         guard let cell = collectionView.visibleCells[0] as? BrowseCollectionViewCell else {
             return UIImageView()
         }
-        imageV.image = cell.imageView.image
-        let imageVFrame = CGRect(x: 0, y:cell.frame.origin.y + 25 , width: kScreenWidth, height: cell.imageView.frame.size.height)
-        imageV.frame = cell.scrollView.convert(imageVFrame, to: UIApplication.shared.keyWindow)
-//        imageV.frame = cell.scrollView.convert(cell.imageView.frame, to: UIApplication.shared.keyWindow)
+//        imageV.image = cell.imageView.image
+//        let imageVFrame = CGRect(x: 0, y:cell.frame.origin.y + 25 , width: kScreenWidth, height: cell.imageView.frame.size.height)
+//        imageV.frame = cell.scrollView.convert(imageVFrame, to: UIApplication.shared.keyWindow)
+        imageV.frame = cell.scrollView.convert(cell.imageView.frame, to: UIApplication.shared.keyWindow)
         return imageV
     }
     
