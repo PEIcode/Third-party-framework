@@ -47,8 +47,6 @@ class PSSearchViewModel: NSObject {
                 //            }
                 if let dict = response.result.value as? Dictionary<String, Any> {
                     let json = JSON(dict)
-//                    print(json)
-                    //                print(json["data"].dictionary ?? "oo")
                     let dataDict = json["data"].dictionary
                     let itemsArray = dataDict!["items"]?.arrayObject
 //                    let itemsArray = json["data"]["items"].arrayObject
