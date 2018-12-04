@@ -17,8 +17,6 @@ class ResultViewController: UIViewController {
     
     lazy var tableView : UITableView = {
         let tab = UITableView.init(frame: CGRect(x: 0, y: 20, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height))
-        
-        
         //        tab.separatorStyle = .none
         return tab
     }()

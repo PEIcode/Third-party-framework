@@ -10,7 +10,7 @@ import UIKit
 fileprivate let PhotoCellID = "PhotoCellID"
 /// 图片间隔
 let PicMargin: CGFloat = 20
-class BrowseViewController: UIViewController{
+open class BrowseViewController: UIViewController{
     //属性
     fileprivate var currentIndex : IndexPath = []
     fileprivate var imageArray: NSArray
@@ -44,15 +44,15 @@ class BrowseViewController: UIViewController{
 //        print(imageArray)
 //        super.init(nibName: nil, bundle: nil)
 //    }
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func loadView() {
+    override open func loadView() {
         super.loadView()
         //        view.frame.size.width += PicMargin
     }
-    override func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         
         setupConllectionView()
@@ -85,10 +85,10 @@ extension BrowseViewController{
 }
 //MARK:-UICollectionViewDataSource
 extension BrowseViewController: UICollectionViewDataSource{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imageArray.count
     }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCellID, for: indexPath) as? BrowseCollectionViewCell else {
             return UICollectionViewCell()
         }
@@ -105,7 +105,7 @@ extension BrowseViewController: UICollectionViewDataSource{
 }
 //MARK:KVO(计算pageControl的currentpage)
 extension BrowseViewController: UIScrollViewDelegate,UICollectionViewDelegate{
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         let bounds = change![NSKeyValueChangeKey.newKey] as! CGRect
         let changeX = bounds.minX
         let pageCurrent = changeX / view.frame.width

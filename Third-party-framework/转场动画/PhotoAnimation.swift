@@ -65,7 +65,7 @@ extension PhotoAnimation: UIViewControllerTransitioningDelegate{
 }
 
 //MARk: 必须实现以下两个方法
-extension PhotoAnimation: UIViewControllerAnimatedTransitioning{
+extension PhotoAnimation: UIViewControllerAnimatedTransitioning {
     //Tells your animator object to perform the transition animations.
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         isPresent ? presentAnimation(transitionContext) : dismissAnimation(transitionContext)
@@ -76,7 +76,7 @@ extension PhotoAnimation: UIViewControllerAnimatedTransitioning{
     }
 }
 //MARk: present 和dismiss具体实现
-extension PhotoAnimation{
+extension PhotoAnimation {
     fileprivate func presentAnimation(_ transitionContext:  UIViewControllerContextTransitioning) {
         guard let presentD = presentDelegate, let indexPath = indexPath else {
             return
@@ -138,7 +138,6 @@ extension PhotoAnimation{
             dismissView.alpha = 0
             presentView?.alpha = 1
         }) {(_) in
-            
             tempImageV.removeFromSuperview()
             dismissView.removeFromSuperview()
             transitionContext.completeTransition(true)
