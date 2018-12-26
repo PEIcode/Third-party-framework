@@ -73,9 +73,16 @@ class NetWorkController: UIViewController, UICollectionViewDelegate, UICollectio
 //        delegate.longPressedCallback
         delegate.longPressedCallback = { (browser, index, image, gesture) in
             print(index)
-            print("11111111")
         }
-//        delegate.bottomView.addSubview(<#T##view: UIView##UIView#>)
+        delegate.cellIsDraging = {
+            delegate.bottomView.isHidden = true
+            delegate.headerView.isHidden = true
+        }
+        delegate.cellEndDrag = {
+            delegate.bottomView.isHidden = false
+            delegate.headerView.isHidden = false
+        }
+//        delegate.bottomView.addSubview()
         //        let transDelegate = XSLPhotoBrowserZoomtransitioning(transView: collectionView.cellForItem(at: indexPath)!)
         //需要传 对应的view对象，拿到 起始frame 结束时的frame（就是最后呈现的cell的imageView的frame）
         let transDelegate = XSLPhotoBrowserZoomtransitioning { (browser, index, view) -> UIView? in
@@ -83,7 +90,7 @@ class NetWorkController: UIViewController, UICollectionViewDelegate, UICollectio
             return collectionView.cellForItem(at: indexP)
         }
 
-        let browser = XSLPhotoBrowser(pageIndex: indexPath.item, dataSource: dataSource, deledate: XSLPhotoBrowserAssembler(), transDelegate: transDelegate)
+        let browser = XSLPhotoBrowser(pageIndex: indexPath.item, dataSource: dataSource, deledate: delegate, transDelegate: transDelegate)
         present(browser, animated: true, completion: nil) }
 
 }

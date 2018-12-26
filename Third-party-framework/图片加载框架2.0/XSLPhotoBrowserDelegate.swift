@@ -31,6 +31,10 @@ protocol XSLPhotoBrowserBaseDelegate: UICollectionViewDelegate {
 
 class XSLPhotoBrowserDelegate: NSObject, XSLPhotoBrowserBaseDelegate {
     weak var browser: XSLPhotoBrowser?
+    /// cellisDrag
+    var cellIsDraging: (() -> Void)?
+    /// cellEndDrag
+    var cellEndDrag: (() -> Void)?
     /// 长按回调。回传参数分别是：浏览器，图片序号，图片对象，手势对象
     var longPressedCallback: ((XSLPhotoBrowser, Int, UIImage?, UILongPressGestureRecognizer) -> Void)?
     /// 图片的contentMode
@@ -48,6 +52,7 @@ class XSLPhotoBrowserDelegate: NSObject, XSLPhotoBrowserBaseDelegate {
         cell.panChangedCallback = { scale in
             let alpha = scale * scale
             self.browser?.transDelegate.maskAlpha = alpha
+            self.cellIsDraging?()
             //需不需要显示状态栏
         }
         // 结束拖拽
@@ -56,6 +61,7 @@ class XSLPhotoBrowserDelegate: NSObject, XSLPhotoBrowserBaseDelegate {
                 self?.dismiss()
             } else {
                 self?.browser?.transDelegate.maskAlpha = 1.0
+                self?.cellEndDrag?()
             }
         }
         //长按
