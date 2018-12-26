@@ -135,12 +135,9 @@ extension BrowseCollectionViewCell{
             if imageH < kScreenHeight {
                 imageView.center = CGPoint(x: kScreenWidth * 0.5, y: kScreenHeight * 0.5)
             }else{
-                
                 imageView.center = CGPoint(x: kScreenWidth * 0.5, y: imageH * 0.5-topInsetForScr)
             }
         }
-        
-        
     }
     /// 计算imageView的尺寸
     ///

@@ -20,6 +20,7 @@ class XSLPresentationController: UIPresentationController {
         super.presentationTransitionWillBegin()
         guard let containerView = self.containerView else { return }
         containerView.addSubview(maskView)
+        maskView.frame = UIScreen.main.bounds
         maskView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         maskView.alpha = 0
         presentedViewController.transitionCoordinator?.animate(alongsideTransition: { _ in

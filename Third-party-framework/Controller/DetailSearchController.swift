@@ -17,6 +17,9 @@ class DetailSearchController: UIViewController {
     var id: String?
     var detailViewModel = DetailSearchViewModel()
     var imageArray: Array<pic>{
+//        return detailViewModel.resultSteps.map({ (a) -> T in
+//            return a.pic
+//        })
         let imgArray: NSMutableArray = []
         for a  in self.detailViewModel.resultSteps {
             if a.pic_urls.count != 0 {
@@ -147,16 +150,21 @@ extension DetailSearchController: DetailSearchViewModelDelegate,UITableViewDeleg
         if cell.iconView.frame.size.height < imgHeig {
             return
         }
+        /// 加载方法1
         let BrowseVc = BrowseViewController.init(imageCounts: picArray, currentIndexP: indexPath, imageInfoArray: imageArray)
-//        let imgURL = picArray[indexPath.row] as! String
-//        let a = URL(string: imgURL)
-//        let BrowseVc = BrowseViewController.init(imageCounts: picArray, currectURLs:imgURL , imageInfoArray: imageArray)
         //设置自定义modal
         BrowseVc.modalPresentationStyle = .custom
         BrowseVc.transitioningDelegate = photoAnimation
-        
+
         photoAnimation.setProperty(indPath: indexPath, self as BrowsePresentDelegate, BrowseVc as BrowseDismissDelegate)
         present(BrowseVc, animated: true, completion: nil)
+        /// 加载方法2
+//        let dataSource = XSLLocalImageDataSource(numberOfItems: { () -> Int in
+//            return self.imageArray.count
+//        }) { (<#Int#>) -> UIImage? in
+//            <#code#>
+//        }
+//        let browser = XSLPhotoBrowser(dataSource: <#T##XSLPhotoBrowserBaseDataSource#>)
     }
 }
 extension DetailSearchController: PSTableViewCellDelegate{
@@ -170,7 +178,7 @@ extension DetailSearchController: PSTableViewCellDelegate{
 //            }
 //        }
 //        let BrowseVc = BrowseViewController.init(imageCounts: imgArray, currentIndexP: )
-        
+
     }
 }
 extension DetailSearchController: BrowsePresentDelegate{

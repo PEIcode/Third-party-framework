@@ -2,4 +2,54 @@
 <Bucket
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Third-party-framework/&#x56fe;&#x7247;&#x52a0;&#x8f7d;&#x6846;&#x67b6;/XSLPhotoBaseDelegate.swift"
+            timestampString = "567413383.839298"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "displayingContentView(_:pageIndex:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Third-party-framework/&#x56fe;&#x7247;&#x52a0;&#x8f7d;&#x6846;&#x67b6;/&#x52a8;&#x753b;&#x5b9e;&#x73b0;&#x76f8;&#x5173;/XSLPhotoBrowserZoomtransitioning.swift"
+            timestampString = "567413465.562045"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "setupPresent()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Third-party-framework/&#x56fe;&#x7247;&#x52a0;&#x8f7d;&#x6846;&#x67b6;/&#x52a8;&#x753b;&#x5b9e;&#x73b0;&#x76f8;&#x5173;/XSLPhotoBrowserZoomtransitioning.swift"
+            timestampString = "567413466.9682111"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "setupPresent()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

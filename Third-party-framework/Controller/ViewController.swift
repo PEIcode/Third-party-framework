@@ -19,7 +19,6 @@ class ViewController: UIViewController,UISearchControllerDelegate,UISearchResult
     var searchDict: [String :Any]{
         return["cid": "","keyword": "豆腐!", "page": "1"]
     }
-    
     lazy var manager: SessionManager = {
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = 120
@@ -27,7 +26,7 @@ class ViewController: UIViewController,UISearchControllerDelegate,UISearchResult
         let man = SessionManager(configuration: configuration)
         return man
     }()
-     var ResultVc = ResultViewController()
+    var ResultVc = ResultViewController()
     
     /// SearchVc
     lazy var seaechVC: UISearchController = {
@@ -58,9 +57,14 @@ class ViewController: UIViewController,UISearchControllerDelegate,UISearchResult
         tableView.dataSource = self
         tableView.tableHeaderView = seaechVC.searchBar
         view.addSubview(tableView)
-        
-        
+        let quitBtn = UIButton(frame: CGRect(x: 100, y: UIScreen.main.bounds.height - 100, width: 100, height: 50))
+        quitBtn.setTitle("退出", for: .normal)
+        quitBtn.addTarget(self, action: #selector(quitBtnClick), for: .touchDown)
+        tableView.addSubview(quitBtn)
        
+    }
+    @objc func quitBtnClick() {
+        dismiss(animated: true, completion: nil)
     }
     //UISearchResultsUpdating方法
     func updateSearchResults(for searchController: UISearchController) {

@@ -10,9 +10,9 @@ import UIKit
 import Foundation
 
 open class XSLPhotoBrowserTransitioning: NSObject, XSLPhotoBrowserTransitioningDelegate {
-    public weak var browser: BrowseViewController?
+    weak var browser: XSLPhotoBrowser?
 
-    public var maskAlpha: CGFloat {
+    var maskAlpha: CGFloat {
         set {
             presentVC?.maskView.alpha = newValue
         }
@@ -24,8 +24,9 @@ open class XSLPhotoBrowserTransitioning: NSObject, XSLPhotoBrowserTransitioningD
     open var presentingAnimator: UIViewControllerAnimatedTransitioning?
     // dismiss转场动画方法
     open var dismissAnimator: UIViewControllerAnimatedTransitioning?
-    //
+    // present转场
     private weak var presentVC: XSLPresentationController?
+
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return presentingAnimator
     }

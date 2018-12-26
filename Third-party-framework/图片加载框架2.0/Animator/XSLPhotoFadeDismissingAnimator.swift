@@ -13,6 +13,7 @@ public class XSLPhotoFadeDismissingAnimator: NSObject, UIViewControllerAnimatedT
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.25
     }
+    
     public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         let duration = self.transitionDuration(using: transitionContext)
         if let view = transitionContext.view(forKey: .from) {

@@ -9,9 +9,9 @@
 import Foundation
 import UIKit
 
-public protocol XSLPhotoBrowserTransitioningDelegate: UIViewControllerTransitioningDelegate {
+protocol XSLPhotoBrowserTransitioningDelegate: UIViewControllerTransitioningDelegate {
     /// 实现者应弱引用 PhotoBrowser，由 PhotoBrowser 初始化完毕后注入
-    var browser: BrowseViewController? { set get }
+    var browser: XSLPhotoBrowser? { set get }
 
     /// 蒙板 alpha 值
     var maskAlpha: CGFloat { set get }
