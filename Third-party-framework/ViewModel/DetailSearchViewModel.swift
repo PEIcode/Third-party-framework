@@ -42,18 +42,21 @@ class DetailSearchViewModel: NSObject {
         manager.request(detailURL, method: .post, parameters: searchDict, encoding: URLEncoding.default, headers:nil ).responseJSON { (response) in
                         if let dict = response.result.value as? Dictionary<String, Any> {
                 let json = JSON(dict)
-                                    print(json)
+//                                    print(json)
                 //                print(json["data"].dictionary ?? "oo")
                 let dataDict = json["data"].dictionary
                 let itemsArray = dataDict?["cook_steps"]?.arrayObject
-                            print(itemsArray!)
+//                            print(itemsArray!)
                             
                 let detailMS = json["data"]["cook_steps"].arrayValue.flatMap(DetailModel.init)
-                            
-                for detailM in detailMS{
-                    self.resultSteps.append(detailM)
+                            let detailMS2 = json["data"]["cook_steps"].arrayValue.map(DetailModel.init)
+//                            print(detailMS2)
+                for detailM in detailMS2{
+                    self.resultSteps.append(detailM!)
                 }
-                print(self.resultSteps)
+                            print(self.resultSteps)
+                
+//                print(self.resultSteps)
 //                detailModel = itemsArray.map(DetailModel.init)
                 //                    let itemsArray = json["data"]["items"].arrayObject
                 //                    print(itemsArray!)

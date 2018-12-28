@@ -35,20 +35,8 @@ class PSSearchViewModel: NSObject {
             let searchUrl = "https://newapi.meishi.cc/search/recipe"
             
             manager.request(searchUrl, method: .post, parameters: searchDict, encoding: URLEncoding.default, headers:nil ).responseJSON { (response) in
-                //            try? JSONSerialization.jsonObject(with: response.data!, options: [])
-                //            String(data: response.data!, encoding: String.Encoding.utf8)
-                //            let status = response.result
-                //            switch status{
-                //            case .success:
-                //                print("request success!!!")
-                //                print(response)
-                //            case .failure(let error):
-                //                print("failure!!!\(error)")
-                //            }
                 if let dict = response.result.value as? Dictionary<String, Any> {
                     let json = JSON(dict)
-//                    print(json)
-                    //                print(json["data"].dictionary ?? "oo")
                     let dataDict = json["data"].dictionary
                     let itemsArray = dataDict!["items"]?.arrayObject
 //                    let itemsArray = json["data"]["items"].arrayObject

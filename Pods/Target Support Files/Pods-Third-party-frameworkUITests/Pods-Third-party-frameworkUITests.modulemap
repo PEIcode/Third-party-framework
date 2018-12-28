@@ -1,0 +1,6 @@
+framework module Pods_Third_party_frameworkUITests {
+  umbrella header "Pods-Third-party-frameworkUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
