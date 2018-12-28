@@ -82,12 +82,10 @@ class XSLPhotoBrowserAssembler: XSLPhotoBrowserDelegate {
         return view
     }()
 
-    var currentIndex: Int = 0
     override func photobrowser(_ browser: XSLPhotoBrowser, viewDidLoad animated: Bool) {
         super.photobrowser(browser, viewDidLoad: animated)
         browser.view.addSubview(headerView)
         browser.view.addSubview(bottomView)
-        currentIndex = browser.pageIndex
     }
     override init() {
         super.init()
@@ -102,6 +100,6 @@ class XSLPhotoBrowserAssembler: XSLPhotoBrowserDelegate {
 
     }
     @objc func deleteBtnClick() {
-        deleteBtnCallback?(currentIndex)
+        deleteBtnCallback?(browser?.pageIndex ?? 0)
     }
 }

@@ -67,7 +67,15 @@ class XSLBaseCollectionViewCell: UICollectionViewCell {
         }
         return CGSize(width: width, height: height)
     }
-
+    /// 计算图片适合的frame
+    private var fitFrame: CGRect {
+        let size = fitSize
+        let y = imageContainer.bounds.height > size.height
+            ? (imageContainer.bounds.height - size.height) * 0.5 : 0
+        let x = imageContainer.bounds.width > size.width
+            ? (imageContainer.bounds.width - size.width) * 0.5 : 0
+        return CGRect(x: x, y: y, width: size.width, height: size.height)
+    }
     /// 复位ImageView
     private func resetImageView() {
         // 如果图片当前显示的size小于原size，则重置为原size
@@ -75,10 +83,10 @@ class XSLBaseCollectionViewCell: UICollectionViewCell {
         let needResetSize = imageView.bounds.size.width < size.width
             || imageView.bounds.size.height < size.height
         UIView.animate(withDuration: 0.25) {
+            self.imageView.center = self.resettingCenter
             if needResetSize {
                 self.imageView.bounds.size = size
             }
-            self.imageView.center = self.resettingCenter
         }
     }
 
@@ -89,8 +97,9 @@ class XSLBaseCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
         imageContainer.frame = contentView.bounds
         imageContainer.setZoomScale(1.0, animated: false)
-        imageView.frame.size = fitSize
-        imageView.center = CGPoint(x: imageContainer.bounds.width / 2, y: imageContainer.bounds.height / 2)
+        imageView.frame = fitFrame
+        imageContainer.setZoomScale(1.0, animated: false)
+//        imageView.center = CGPoint(x: imageContainer.bounds.width / 2, y: imageContainer.bounds.height / 2)
     }
     override init(frame: CGRect) {
         super.init(frame: frame)

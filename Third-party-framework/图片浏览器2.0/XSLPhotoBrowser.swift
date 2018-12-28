@@ -88,10 +88,11 @@ class XSLPhotoBrowser: UIViewController {
             collectionView.contentInsetAdjustmentBehavior = .never
         }
         collectionView.reloadData()
+        //注册不同的cell
         dataSource.registerCell(for: collectionView)
 //        collectionView.scrollToItem(at: IndexPath(item: pageIndex, section: 0), at: UICollectionView.ScrollPosition.centeredHorizontally, animated: false)
         scrollToItem(index: pageIndex, at: .left, animation: true)
-        /// 强制刷新，才能在animateTransition之前拿到colleCell的frame
+        /// 强制刷新，才能在animateTransition()之前拿到colleCell的frame
         collectionView.layoutIfNeeded()
     }
 
@@ -133,5 +134,8 @@ class XSLPhotoBrowser: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         delegate.photobrowser(self, viewDidLoad: animated)
+    }
+    deinit {
+        print("XSLPhotoBrowser销毁")
     }
 }

@@ -62,6 +62,7 @@ class XSLPhotoBrowserProgressView: UIView {
         path.lineWidth = 1
         return path.cgPath
     }
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
