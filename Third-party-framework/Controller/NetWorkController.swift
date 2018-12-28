@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Kingfisher
 class NetWorkController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     lazy var imgArray: [String] = {
@@ -66,9 +66,12 @@ class NetWorkController: UIViewController, UICollectionViewDelegate, UICollectio
 
         let dataSource = XSLNetWorkImageDataSource(numberOfItems: { () -> Int in
             return self.imgArray.count
-        }) { (index) -> String? in
+        }, placeholder: { (Int) -> UIImage? in
+            let cell = collectionView.cellForItem(at: indexPath) as? XSLPhotoBrowserNetWorkCell
+            return cell?.imageView.image
+        }, urlCallback: { (index) -> String? in
             return self.imgArray[index]
-        }
+        })
         let delegate = XSLPhotoBrowserAssembler()
 //        delegate.longPressedCallback
         delegate.longPressedCallback = { (browser, index, image, gesture) in
@@ -82,6 +85,12 @@ class NetWorkController: UIViewController, UICollectionViewDelegate, UICollectio
             delegate.bottomView.isHidden = false
             delegate.headerView.isHidden = false
         }
+        delegate.deleteBtnCallback = {
+            (index) in
+            self.imgArray.remove(at: index)
+            self.collectionV.reloadData()
+            delegate.browser?.reloadData()
+        }
 //        delegate.bottomView.addSubview()
         //        let transDelegate = XSLPhotoBrowserZoomtransitioning(transView: collectionView.cellForItem(at: indexPath)!)
         //需要传 对应的view对象，拿到 起始frame 结束时的frame（就是最后呈现的cell的imageView的frame）
@@ -89,7 +98,6 @@ class NetWorkController: UIViewController, UICollectionViewDelegate, UICollectio
             let indexP = IndexPath(item: index, section: 0)
             return collectionView.cellForItem(at: indexP)
         }
-
         let browser = XSLPhotoBrowser(pageIndex: indexPath.item, dataSource: dataSource, deledate: delegate, transDelegate: transDelegate)
         present(browser, animated: true, completion: nil) }
 

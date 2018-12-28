@@ -8,9 +8,7 @@
 
 import UIKit
 
-
 class XSLPhotoBrowserAssembler: XSLPhotoBrowserDelegate {
-
 
     lazy var offsetX: CGFloat = {
         if #available(iOS 11.0, *), let window = UIApplication.shared.keyWindow {
@@ -40,17 +38,26 @@ class XSLPhotoBrowserAssembler: XSLPhotoBrowserDelegate {
         }
         return 0
     }()
+    /// quitBtnCallback
+    var quitBtnCallback: ((XSLPhotoBrowserAssembler) -> Void)?
+    /// deleteBtnCallback
+    var deleteBtnCallback: ((_ index: Int) -> Void)?
 
-    var backButton: ((XSLPhotoBrowserAssembler) -> Void)?
+    /// 
     lazy var headerView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: SafeTop(y: 0), width: UIScreen.main.bounds.width, height: 44))
-//        view.backgroundColor = .white
         view.layer.shadowColor = UIColor.white.cgColor
-        let button = UIButton()
-        button.setImage(UIImage(named: "error"), for: .normal)
-        button.frame = CGRect(x: 10, y: 0, width: 30, height: 30)
-        button.addTarget(self, action: #selector(quitClick), for: .touchDown)
-        view.addSubview(button)
+        let quitBtn = UIButton()
+        quitBtn.setImage(UIImage(named: "error"), for: .normal)
+        quitBtn.frame = CGRect(x: 10, y: 0, width: 30, height: 30)
+        quitBtn.addTarget(self, action: #selector(quitBtnClick), for: .touchDown)
+        view.addSubview(quitBtn)
+        let moreBtn = UIButton()
+        moreBtn.setImage(UIImage(named: "more"), for: .normal)
+        moreBtn.frame = CGRect(x: UIScreen.main.bounds.width - 50, y: 0, width: 30, height: 30)
+        moreBtn.addTarget(self, action: #selector(moreBtnClick), for: .touchDown)
+        view.addSubview(moreBtn)
+
         return view
     }()
 
@@ -58,15 +65,20 @@ class XSLPhotoBrowserAssembler: XSLPhotoBrowserDelegate {
         let heigt: CGFloat = 44.0
         let y = UIScreen.main.bounds.height - heigt - offsetY
         let view = UIView(frame: CGRect(x: 0, y: y, width: UIScreen.main.bounds.width, height: 44))
-                view.backgroundColor = .white
+        view.alpha = 0.8
         view.layer.shadowColor = UIColor.white.cgColor
-        let button = UIButton()
-//        button.setImage(UIImage(named: "error"), for: .normal)
-        button.setTitle("更多", for: .normal)
-        button.backgroundColor = .red
-        button.frame = CGRect(x: 10, y: 0, width: 44, height: 44)
-        button.addTarget(self, action: #selector(moreClick), for: .touchDown)
-        view.addSubview(button)
+        let menuBtn = UIButton()
+        menuBtn.setImage(UIImage(named: "menu"), for: .normal)
+        menuBtn.frame = CGRect(x: 10, y: 0, width: 44, height: 44)
+        menuBtn.addTarget(self, action: #selector(menuBtnClick), for: .touchDown)
+        view.addSubview(menuBtn)
+
+        let deleteBtn = UIButton()
+        deleteBtn.setImage(UIImage(named: "delete"), for: .normal)
+        deleteBtn.frame = CGRect(x: UIScreen.main.bounds.width - 50, y: 0, width: 30, height: 30)
+        deleteBtn.addTarget(self, action: #selector(deleteBtnClick), for: .touchDown)
+        view.addSubview(deleteBtn)
+
         return view
     }()
 
@@ -80,37 +92,16 @@ class XSLPhotoBrowserAssembler: XSLPhotoBrowserDelegate {
     override init() {
         super.init()
     }
-//    var callback: ((_ image: UIImage, _ index: Int) -> Void)?
-//
-//    init(callback: ((_ image: UIImage, _ index: Int) -> Void)?) {
-//        self.callback = callback
-//    }
-    @objc func quitClick() {
+    @objc func quitBtnClick() {
         self.dismiss()
     }
-    @objc func moreClick() {
-//        UIAlertController(title: "", message: <#T##String?#>, preferredStyle: <#T##UIAlertControllerStyle#>)
-        let alertV = UIAlertController(title: "更多操作", message: "", preferredStyle: .actionSheet)
-        let action = UIAlertAction(title: "save", style: .default) { (action) in
-            //保存到相册
-            if let cell = self.browser?.collectionView.cellForItem(at: IndexPath(item: self.currentIndex, section: 0)) as? XSLBaseCollectionViewCell {
-                UIImageWriteToSavedPhotosAlbum(cell.imageView.image!, self, #selector(self.saveSucceed), nil)
-            }
+    @objc func moreBtnClick() {
 
-        }
-        let deletAction = UIAlertAction(title: "delete", style: .default) { (deleAction) in
-            // 删除
-            if let broweser = self.browser {
-//                broweser.itemsCount
-            }
-
-        }
-        alertV.addAction(action)
-        alertV.addAction(deletAction)
-        browser?.present(alertV, animated: true, completion: nil)
     }
+    @objc func menuBtnClick() {
 
-    @objc func saveSucceed() {
-
+    }
+    @objc func deleteBtnClick() {
+        deleteBtnCallback?(currentIndex)
     }
 }

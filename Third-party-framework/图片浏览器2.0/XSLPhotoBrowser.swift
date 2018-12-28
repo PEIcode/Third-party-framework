@@ -120,6 +120,16 @@ class XSLPhotoBrowser: UIViewController {
         return dataSource.collectionView(collectionView, numberOfItemsInSection: 0)
     }
 
+    open func reloadData() {
+        let numberOfItems = itemsCount
+        guard numberOfItems > 0 else {
+            delegate.dismissPhotoBrowser(self)
+            return
+        }
+        pageIndex = min(pageIndex, numberOfItems - 1)
+        collectionView.reloadData()
+        delegate.photoBrowserDidReloadData(self)
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         delegate.photobrowser(self, viewDidLoad: animated)

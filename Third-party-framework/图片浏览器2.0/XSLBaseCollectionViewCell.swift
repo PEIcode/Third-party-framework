@@ -227,7 +227,7 @@ extension XSLBaseCollectionViewCell: UIGestureRecognizerDelegate {
             return false
         }
         //横向滑动时，不响应Pan手势
-        if abs(Int(velocity.x)) > Int(velocity.y){
+        if abs(Int(velocity.x)) > Int(velocity.y) {
             return false
         }
         //向下滑动，如果图片顶部超出可视范围，不响应
