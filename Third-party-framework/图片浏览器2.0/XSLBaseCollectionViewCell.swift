@@ -162,7 +162,6 @@ extension XSLBaseCollectionViewCell {
             let x = pointInView.x - (w / 2.0)
             let y = pointInView.y - (h / 2.0)
             let rect = CGRect(x: x, y: y, width: w, height: h)
-            print(rect)
             imageContainer.zoom(to: CGRect(x: x, y: y, width: w, height: h), animated: true)
         } else {
             imageContainer.setZoomScale(1.0, animated: true)

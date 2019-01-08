@@ -1,0 +1,6 @@
+framework module XSLPhotoBrowser {
+  umbrella header "XSLPhotoBrowser-umbrella.h"
+
+  export *
+  module * { export * }
+}

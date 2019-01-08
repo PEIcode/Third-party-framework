@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import XSLPhotoBrowser
 
 class DetailSearchController: UIViewController {
 
@@ -151,20 +152,29 @@ extension DetailSearchController: DetailSearchViewModelDelegate,UITableViewDeleg
             return
         }
         /// 加载方法1
-        let BrowseVc = BrowseViewController.init(imageCounts: picArray, currentIndexP: indexPath, imageInfoArray: imageArray)
-        //设置自定义modal
-        BrowseVc.modalPresentationStyle = .custom
-        BrowseVc.transitioningDelegate = photoAnimation
-
-        photoAnimation.setProperty(indPath: indexPath, self as BrowsePresentDelegate, BrowseVc as BrowseDismissDelegate)
-        present(BrowseVc, animated: true, completion: nil)
+//        let BrowseVc = BrowseViewController.init(imageCounts: picArray, currentIndexP: indexPath, imageInfoArray: imageArray)
+//        //设置自定义modal
+//        BrowseVc.modalPresentationStyle = .custom
+//        BrowseVc.transitioningDelegate = photoAnimation
+//
+//        photoAnimation.setProperty(indPath: indexPath, self as BrowsePresentDelegate, BrowseVc as BrowseDismissDelegate)
+//        present(BrowseVc, animated: true, completion: nil)
         /// 加载方法2
 //        let dataSource = XSLLocalImageDataSource(numberOfItems: { () -> Int in
 //            return self.imageArray.count
-//        }) { (<#Int#>) -> UIImage? in
-//            <#code#>
+//        }) { (index) -> UIImage? in
+//
 //        }
-//        let browser = XSLPhotoBrowser(dataSource: <#T##XSLPhotoBrowserBaseDataSource#>)
+        let netDataSource = XSLNetWorkImageDataSource(numberOfItems: { () -> Int in
+            return self.imageArray.count
+        }, placeholder: { (index) -> UIImage? in
+            return nil
+        }) { (index) -> String? in
+            let pic = self.imageArray[index]
+            return pic.big
+        }
+        let browser = XSLPhotoBrowser(pageIndex: indexPath.item, dataSource: netDataSource)
+        present(browser, animated: true, completion: nil)
     }
 }
 extension DetailSearchController: PSTableViewCellDelegate{

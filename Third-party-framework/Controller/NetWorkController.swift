@@ -8,6 +8,8 @@
 
 import UIKit
 import Kingfisher
+import XSLPhotoBrowser
+
 class NetWorkController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     lazy var imgArray: [String] = {
