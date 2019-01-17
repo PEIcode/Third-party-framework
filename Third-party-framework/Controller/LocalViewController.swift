@@ -72,6 +72,7 @@ extension LocalViewController: UICollectionViewDelegate, UICollectionViewDataSou
         }) { (index) -> UIImage? in
             return UIImage(named: self.imgArray[index])
         }
+        
         present(XSLPhotoBrowser(pageIndex: indexPath.item, dataSource: dataSource)
 , animated: true, completion: nil)
     }

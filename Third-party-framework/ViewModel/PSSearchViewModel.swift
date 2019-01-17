@@ -44,9 +44,7 @@ class PSSearchViewModel: NSObject {
                     self.resultItems = itemsArray!
 //                    print(self.resultItems.count)
                     self.delegate?.fetchDataFinish()
-                    
-                   
-                    
+
                 }
                 
             }        

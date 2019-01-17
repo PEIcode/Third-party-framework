@@ -24,21 +24,20 @@ open class XSLPhotoBrowser: UIViewController {
     /// collectionView 代理
     public var delegate: XSLPhotoBrowserBaseDelegate
 
-    ///
-    var transDelegate: XSLPhotoBrowserTransitioningDelegate {
-        didSet {
-            self.transitioningDelegate = transDelegate
-        }
+    /// UIViewController 转场动画协议
+    var transDelegate: XSLPhotoBrowserTransitioningDelegate
+
+
+    /// 返回正在执行转场动画的image
+    public var transitionImage: UIImage? {
+        return delegate.transitionImage(self, pageIndex: pageIndex)
     }
 
-    /// 返回正在执行转场动画的view
-    public var transitionZoomView: UIView? {
-        return delegate.transitionZoomView(self, pageIndex: pageIndex)
-    }
     /// 返回对应collectionViewCell的image
     public var imageForCollectionViewCell: UIView? {
         return delegate.displayingContentView(self, pageIndex: pageIndex)
     }
+
     public lazy var flowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -62,10 +61,10 @@ open class XSLPhotoBrowser: UIViewController {
         return collectionV
     }()
 
-    public init(pageIndex: Int, dataSource: XSLPhotoBrowserBaseDataSource, deledate: XSLPhotoBrowserBaseDelegate = XSLPhotoBrowserDelegate(), transDelegate: XSLPhotoBrowserTransitioningDelegate = XSLPhotoBrowserFadeTransitioning()) {
+    public init(pageIndex: Int, dataSource: XSLPhotoBrowserBaseDataSource, delegate: XSLPhotoBrowserBaseDelegate = XSLPhotoBrowserDelegate(), transDelegate: XSLPhotoBrowserTransitioningDelegate = XSLPhotoBrowserFadeTransitioning()) {
         self.pageIndex = pageIndex
         self.dataSource = dataSource
-        self.delegate = deledate
+        self.delegate = delegate
         self.transDelegate = transDelegate
 
         super.init(nibName: nil, bundle: nil)
@@ -73,7 +72,7 @@ open class XSLPhotoBrowser: UIViewController {
         self.transitioningDelegate = transDelegate
 
         dataSource.browser = self
-        deledate.browser = self
+        delegate.browser = self
         transDelegate.browser = self
     }
 
@@ -92,7 +91,7 @@ open class XSLPhotoBrowser: UIViewController {
         dataSource.registerCell(for: collectionView)
 //        collectionView.scrollToItem(at: IndexPath(item: pageIndex, section: 0), at: UICollectionView.ScrollPosition.centeredHorizontally, animated: false)
         scrollToItem(index: pageIndex, at: .left, animation: true)
-        /// 强制刷新，才能在animateTransition()之前拿到colleCell的frame
+        /// 强制刷新，才能在animateTransition()之前拿到Cell的frame
         collectionView.layoutIfNeeded()
     }
 

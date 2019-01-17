@@ -7,8 +7,9 @@ PODS:
   - SDWebImage/Core (4.4.2)
   - SnapKit (4.0.0)
   - SwiftyJSON (4.1.0)
-  - XSLPhotoBrowser (0.0.4):
+  - XSLPhotoBrowser (0.0.9):
     - Kingfisher
+    - SDWebImage
 
 DEPENDENCIES:
   - Alamofire
@@ -17,7 +18,7 @@ DEPENDENCIES:
   - SDWebImage
   - SnapKit (~> 4.0.0)
   - SwiftyJSON
-  - XSLPhotoBrowser (~> 0.0.4)
+  - XSLPhotoBrowser (~> 0.0.9)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -36,8 +37,8 @@ SPEC CHECKSUMS:
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
-  XSLPhotoBrowser: 0b89dd4c3352a3bc366ac7e0faf02ca23f3ca9b1
+  XSLPhotoBrowser: d48d0d3daa6bf7406267ee20694927e8a0bcd835
 
-PODFILE CHECKSUM: afe7fa0a13173dafbefa30c437395b19b0f32582
+PODFILE CHECKSUM: 23fabd6a9d1d4308bce124ed5889b39b7becb79f
 
 COCOAPODS: 1.5.3

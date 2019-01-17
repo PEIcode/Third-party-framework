@@ -79,19 +79,20 @@ class NetWorkController: UIViewController, UICollectionViewDelegate, UICollectio
         delegate.longPressedCallback = { (browser, index, image, gesture) in
             print(index)
         }
-        delegate.cellIsDraging = {
-            delegate.bottomView.isHidden = true
-            delegate.headerView.isHidden = true
-        }
-        delegate.cellEndDrag = {
-            delegate.bottomView.isHidden = false
-            delegate.headerView.isHidden = false
-        }
+//        delegate.cellIsDraging = {
+//            print("cellIsDraging...")
+//            delegate.bottomView.isHidden = true
+//            delegate.headerView.isHidden = true
+//        }
+//        delegate.cellEndDrag = {
+//            delegate.bottomView.isHidden = false
+//            delegate.headerView.isHidden = false
+//        }
         delegate.deleteBtnCallback = {
-            (index) in
-            self.imgArray.remove(at: index)
-            self.collectionV.reloadData()
-            delegate.browser?.reloadData()
+            [weak self] (index) in
+            self?.imgArray.remove(at: index)
+            self?.collectionV.reloadData()
+//            delegate.browser?.reloadData()
         }
 //        delegate.bottomView.addSubview()
         //        let transDelegate = XSLPhotoBrowserZoomtransitioning(transView: collectionView.cellForItem(at: indexPath)!)
@@ -100,7 +101,7 @@ class NetWorkController: UIViewController, UICollectionViewDelegate, UICollectio
             let indexP = IndexPath(item: index, section: 0)
             return collectionView.cellForItem(at: indexP)
         }
-        let browser = XSLPhotoBrowser(pageIndex: indexPath.item, dataSource: dataSource, deledate: delegate, transDelegate: transDelegate)
+        let browser = XSLPhotoBrowser(pageIndex: indexPath.item, dataSource: dataSource, delegate: delegate, transDelegate: transDelegate)
         present(browser, animated: true, completion: nil) }
 
 }

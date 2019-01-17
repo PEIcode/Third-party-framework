@@ -165,6 +165,7 @@ extension DetailSearchController: DetailSearchViewModelDelegate,UITableViewDeleg
 //        }) { (index) -> UIImage? in
 //
 //        }
+        /// 方案3
         let netDataSource = XSLNetWorkImageDataSource(numberOfItems: { () -> Int in
             return self.imageArray.count
         }, placeholder: { (index) -> UIImage? in
@@ -173,10 +174,12 @@ extension DetailSearchController: DetailSearchViewModelDelegate,UITableViewDeleg
             let pic = self.imageArray[index]
             return pic.big
         }
-        let browser = XSLPhotoBrowser(pageIndex: indexPath.item, dataSource: netDataSource)
+        let delegate = XSLPhotoBrowserAssembler()
+        let browser = XSLPhotoBrowser(pageIndex: indexPath.item, dataSource: netDataSource, delegate: delegate)
         present(browser, animated: true, completion: nil)
     }
 }
+//
 extension DetailSearchController: PSTableViewCellDelegate{
     func iconViewDidSelect() {
         //进入新的控制器

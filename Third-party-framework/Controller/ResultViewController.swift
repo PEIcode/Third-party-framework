@@ -11,28 +11,28 @@ import UIKit
 class ResultViewController: UIViewController {
 
     var keySearchWord = ""
-    
+    static let screenW = UIScreen.main.bounds.size.width
+    static let screenH = UIScreen.main.bounds.size.height
     ///
     var searchViewModel = PSSearchViewModel()
     
     lazy var tableView : UITableView = {
-        let tab = UITableView.init(frame: CGRect(x: 0, y: 20, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height))
+        let tab = UITableView.init(frame: CGRect(x: 0, y: 40, width: kScreenWidth, height: kScreenHeight))
         //        tab.separatorStyle = .none
         return tab
     }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 120
         view.addSubview(tableView)
-        
-        searchViewModel.delegate = self
     }
-
     func changeForResult() {
         searchViewModel.keyword = keySearchWord
         searchViewModel.fetchSearchDataList()
+        tableView.reloadData()
     }
 }
 //MARK: - tableView的数据源代理方法
@@ -65,7 +65,7 @@ extension ResultViewController: UITableViewDelegate,UITableViewDataSource,PSSear
         //
         //        设置cell的imageView
 //        cell?.imageView?.sd_setImage(with: url!, completed: nil)
-        cell?.imageView?.sd_setImage(with: url!, placeholderImage: nil, options:.cacheMemoryOnly, completed: nil)
+        cell?.imageView?.sd_setImage(with: url ?? URL(string: ""), placeholderImage: nil, options:.cacheMemoryOnly, completed: nil)
         return cell!
     }
     func fetchDataFinish() {

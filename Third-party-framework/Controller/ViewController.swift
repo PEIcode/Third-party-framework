@@ -10,8 +10,12 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import SDWebImage
+
+/// 屏幕的宽
+let kScreenWidth = UIScreen.main.bounds.size.width
+/// 屏幕的高
+let kScreenHeight = UIScreen.main.bounds.size.height
 class ViewController: UIViewController,UISearchControllerDelegate,UISearchResultsUpdating{
-    
     
     var searchViewModel = PSSearchViewModel()
     
@@ -37,33 +41,31 @@ class ViewController: UIViewController,UISearchControllerDelegate,UISearchResult
         sea.searchBar.sizeToFit()
         return sea
     }()
+
+//    @IBOutlet weak var tableView: UITableView!
     lazy var tableView : UITableView = {
-        let tab = UITableView.init(frame: CGRect(x: 0, y: 20, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height))
+        let tab = UITableView.init(frame: CGRect(x: 0, y: 80, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height))
         return tab
     }()
-    @IBOutlet weak var iconView: UIImageView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        self.searchViewModel.delegate = self
-//        self.searchViewModel.fetchSearchDataList()
-        
-        
+        // 1
+//        searchViewModel.delegate = self
+//        searchViewModel.fetchSearchDataList()
+
+        // 2
 //        UseAlamofire()
         
         seaechVC.delegate = self
         seaechVC.searchResultsUpdater = self
+
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableHeaderView = seaechVC.searchBar
         view.addSubview(tableView)
-        let quitBtn = UIButton(frame: CGRect(x: 100, y: UIScreen.main.bounds.height - 100, width: 100, height: 50))
-        quitBtn.setTitle("退出", for: .normal)
-        quitBtn.addTarget(self, action: #selector(quitBtnClick), for: .touchDown)
-        tableView.addSubview(quitBtn)
-       
     }
-    @objc func quitBtnClick() {
+    @IBAction func quitBtnClick(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
     //UISearchResultsUpdating方法
@@ -71,14 +73,12 @@ class ViewController: UIViewController,UISearchControllerDelegate,UISearchResult
         let result = seaechVC.searchBar.text
         ResultVc.keySearchWord = result!
         ResultVc.changeForResult()
-//        searchViewModel.fetchSearchDataList()
-        
     }
 
     
    
 }
-//MARK: - tableView的数据源代理方法
+//MARK: - tableView的数据源代理方法（默认给一个搜索词）
 extension ViewController: UITableViewDelegate,UITableViewDataSource,PSSearchViewModelDelegate{
    
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -153,14 +153,14 @@ extension ViewController{
             let json = try? JSONSerialization.jsonObject(with: data!, options: [])
             //            print(json!)
             //            print(json as! Dictionary<String,Any>! as Any )
-            let dict = json as! Dictionary<String,Any>!
-            let dataDict = dict!["data"] as! Dictionary<String,Any>!
+            let dict = json as! Dictionary<String,Any>
+            let dataDict = dict["data"] as! Dictionary<String,Any>
             //这是所有的数据
             //            print(dataDict!)
             // 推荐关键字
             //            print(dataDict!["about_ingredient"] ?? "数据不存在")
             // items
-            let itemsArray = dataDict!["items"]
+            let itemsArray = dataDict["items"]
             print(itemsArray!)
         }
         task.resume()
@@ -188,12 +188,13 @@ extension ViewController{
                 let dataDict = json["data"].dictionary
                 //当前页数的所有items
                 let itemsArray = dataDict!["items"]
+
                 //                self.resultItems = dataDict!["items"]
                 //                self.resultItems = (itemsArray?.arrayObject)!
                 //                print(self.resultItems.count)
                 //                self.tableView.reloadData()
-                //                print(itemsArray?.count ?? "没有数据")
-                
+                                print(itemsArray?.count ?? "没有数据")
+
             }
             
         }
