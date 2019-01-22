@@ -83,6 +83,7 @@ class NetAndLocalController: UIViewController, UICollectionViewDelegate, UIColle
         delegate.longPressedCallback = { (browser, index, image, gesture) in
             print(index)
         }
+
         delegate.deleteBtnCallback = {
             [weak self] (index) in
             self?.imgArray.remove(at: index)
@@ -97,8 +98,9 @@ class NetAndLocalController: UIViewController, UICollectionViewDelegate, UIColle
             return collectionView.cellForItem(at: indexP)
         }
         let browser = XSLPhotoBrowser(pageIndex: indexPath.item, dataSource: dataSource, delegate: delegate, transDelegate: transDelegate)
-//        present(browser, animated: true, completion: nil)
+
         browser.show()
     }
+
 
 }
