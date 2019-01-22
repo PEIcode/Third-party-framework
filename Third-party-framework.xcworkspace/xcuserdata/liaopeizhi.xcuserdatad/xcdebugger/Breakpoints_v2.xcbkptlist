@@ -99,10 +99,6 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
-<<<<<<< HEAD
-=======
-
->>>>>>> ca68f6c4ff2e894da4bc7712e2cb7b6065b78ad0
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
@@ -110,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Third-party-framework/Controller/XSLFinalDataSource.swift"
-            timestampString = "569831997.300481"
+            timestampString = "569833543.256901"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "40"
@@ -119,9 +115,5 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
-<<<<<<< HEAD
-=======
-
->>>>>>> ca68f6c4ff2e894da4bc7712e2cb7b6065b78ad0
    </Breakpoints>
 </Bucket>

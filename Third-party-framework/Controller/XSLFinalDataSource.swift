@@ -38,8 +38,10 @@ class XSLFinalDataSource: NSObject, XSLPhotoBrowserBaseDataSource {
         if str?.hasPrefix("http") ?? false {
 //            let path = NSHomeDirectory() +
             cell.reloadData(placeholder: placehodleImageCallback(indexPath.item), autoloadURLString: loadURLImageCallback(indexPath.item))
+            return cell
         }
         cell.imageView.image = UIImage(named: str ?? "")
+        cell.progressView.isHidden = true
         return cell
     }
 
