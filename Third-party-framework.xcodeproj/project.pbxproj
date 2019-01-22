@@ -21,6 +21,9 @@
 		39507C8D21CBA5B100E3B5FF /* NetWorkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39507C8C21CBA5B100E3B5FF /* NetWorkController.swift */; };
 		39507C8F21CBAD0500E3B5FF /* Photos.plist in Resources */ = {isa = PBXBuildFile; fileRef = 39507C8E21CBAD0500E3B5FF /* Photos.plist */; };
 		39507C9121CCA3C500E3B5FF /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39507C9021CCA3C500E3B5FF /* TestViewController.swift */; };
+
+		3954023721F6F07400948FE7 /* XSLFinalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3954023621F6F07400948FE7 /* XSLFinalDataSource.swift */; };
+
 		398F284821F030D900DDBBE2 /* NetAndLocalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398F284721F030D900DDBBE2 /* NetAndLocalController.swift */; };
 		398F284A21F0315500DDBBE2 /* NetAndLocal.plist in Resources */ = {isa = PBXBuildFile; fileRef = 398F284921F0315500DDBBE2 /* NetAndLocal.plist */; };
 		39D384F3215A4FE30012119A /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D384F2215A4FE30012119A /* ResultViewController.swift */; };
@@ -83,6 +86,9 @@
 		39507C8C21CBA5B100E3B5FF /* NetWorkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetWorkController.swift; sourceTree = "<group>"; };
 		39507C8E21CBAD0500E3B5FF /* Photos.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Photos.plist; sourceTree = "<group>"; };
 		39507C9021CCA3C500E3B5FF /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+
+		3954023621F6F07400948FE7 /* XSLFinalDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XSLFinalDataSource.swift; sourceTree = "<group>"; };
+
 		398F284721F030D900DDBBE2 /* NetAndLocalController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetAndLocalController.swift; sourceTree = "<group>"; };
 		398F284921F0315500DDBBE2 /* NetAndLocal.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = NetAndLocal.plist; sourceTree = "<group>"; };
 		39D384F2215A4FE30012119A /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
@@ -231,6 +237,8 @@
 				39507C8C21CBA5B100E3B5FF /* NetWorkController.swift */,
 				39507C9021CCA3C500E3B5FF /* TestViewController.swift */,
 				398F284721F030D900DDBBE2 /* NetAndLocalController.swift */,
+
+				3954023621F6F07400948FE7 /* XSLFinalDataSource.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -508,6 +516,7 @@
 				39F1510B215F66DC0009F729 /* DetailModel.swift in Sources */,
 				39F15109215F5A5A0009F729 /* DetailSearchViewModel.swift in Sources */,
 				39E0B0422177250300ACAD39 /* BrowseViewController.swift in Sources */,
+				3954023721F6F07400948FE7 /* XSLFinalDataSource.swift in Sources */,
 				39507C8B21CB9ED000E3B5FF /* LocalCell.swift in Sources */,
 				39F15106215F2BB90009F729 /* PSStepCell.swift in Sources */,
 				393E3693214F94F60063189B /* ViewController.swift in Sources */,
