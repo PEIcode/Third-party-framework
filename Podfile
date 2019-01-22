@@ -10,7 +10,7 @@ target 'Third-party-framework' do
   pod 'SDWebImage'	
   pod 'FLAnimatedImage'
   pod 'SnapKit', '~> 4.0.0'
-  pod 'XSLPhotoBrowser', '~> 0.0.9'
+  pod 'XSLPhotoBrowser', '~> 0.1.0'
   target 'Third-party-frameworkTests' do
     inherit! :search_paths
     # Pods for testing
