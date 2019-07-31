@@ -166,17 +166,17 @@ extension DetailSearchController: DetailSearchViewModelDelegate,UITableViewDeleg
 //
 //        }
         /// 方案3
-        let netDataSource = XSLNetWorkImageDataSource(numberOfItems: { () -> Int in
-            return self.imageArray.count
-        }, placeholder: { (index) -> UIImage? in
-            return nil
-        }) { (index) -> String? in
-            let pic = self.imageArray[index]
-            return pic.big
-        }
-        let delegate = XSLPhotoBrowserAssembler()
-        let browser = XSLPhotoBrowser(pageIndex: indexPath.item, dataSource: netDataSource, delegate: delegate)
-        present(browser, animated: true, completion: nil)
+//        let netDataSource = XSLNetWorkImageDataSource(numberOfItems: { () -> Int in
+//            return self.imageArray.count
+//        }, placeholder: { (index) -> UIImage? in
+//            return nil
+//        }) { (index) -> String? in
+//            let pic = self.imageArray[index]
+//            return pic.big
+//        }
+//        let delegate = XSLPhotoBrowserAssembler()
+//        let browser = XSLPhotoBrowser(pageIndex: indexPath.item, dataSource: netDataSource, delegate: delegate)
+//        present(browser, animated: true, completion: nil)
     }
 }
 //

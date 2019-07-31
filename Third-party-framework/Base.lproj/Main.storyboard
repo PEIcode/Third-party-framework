@@ -10,97 +10,103 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Base View Controller-->
         <scene sceneID="dEa-VT-qDW">
             <objects>
-                <viewController id="KGU-Xa-sUs" sceneMemberID="viewController">
+                <viewController id="KGU-Xa-sUs" customClass="BaseViewController" customModule="Third_party_framework" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oLg-vd-4pY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PqR-Fg-Tga">
-                                <rect key="frame" x="29" y="245" width="317" height="85"/>
-                                <color key="backgroundColor" red="0.99326092004776001" green="0.67041396394531161" blue="0.14035446624449854" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <state key="normal" title="加载本地图片">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                </state>
-                                <connections>
-                                    <segue destination="sl3-OO-ixP" kind="modal" id="jkT-ia-1XT"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1YQ-aM-AiS">
-                                <rect key="frame" x="29" y="599.66666666666663" width="317" height="85"/>
-                                <color key="backgroundColor" red="0.99326091999999999" green="0.47694353820000002" blue="0.45688752269999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <state key="normal" title="测试">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                </state>
-                                <connections>
-                                    <segue destination="neV-qh-AHK" kind="modal" id="AX6-Jn-pVN"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UB7-g0-pBv">
-                                <rect key="frame" x="29" y="363.66666666666669" width="317" height="85"/>
-                                <color key="backgroundColor" red="0.99326092004776001" green="0.476943538176344" blue="0.4568875226614651" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="a6k-HP-cDa">
+                                <rect key="frame" x="29" y="101" width="317" height="610"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g0A-SG-BAw">
+                                        <rect key="frame" x="0.0" y="0.0" width="317" height="60"/>
+                                        <color key="backgroundColor" red="1" green="0.47385590591380322" blue="0.17173047157878041" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="jeY-OB-wMH"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                        <state key="normal" title="🔍美食搜索">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="BYZ-38-t0r" kind="modal" id="xUB-P6-jMn"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PqR-Fg-Tga">
+                                        <rect key="frame" x="0.0" y="110" width="317" height="60"/>
+                                        <color key="backgroundColor" red="0.99326092004776001" green="0.67041396394531161" blue="0.14035446624449854" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                        <state key="normal" title="加载本地图片">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="sl3-OO-ixP" kind="modal" id="jkT-ia-1XT"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jCQ-pA-rfA">
+                                        <rect key="frame" x="0.0" y="220" width="317" height="60"/>
+                                        <color key="backgroundColor" red="0.99326091999999999" green="0.47694353820000002" blue="0.45688752269999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                        <state key="normal" title="本地网络混合加载">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="4oE-1J-99V" kind="modal" id="1n6-sf-kAn"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UB7-g0-pBv">
+                                        <rect key="frame" x="0.0" y="330" width="317" height="60"/>
+                                        <color key="backgroundColor" red="0.99326092004776001" green="0.476943538176344" blue="0.4568875226614651" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <state key="normal" title="加载网络图片（自定义控件）">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="5ga-iR-OJt" kind="modal" id="bSe-8M-SPB"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kcx-O3-CE7">
+                                        <rect key="frame" x="0.0" y="440" width="317" height="60"/>
+                                        <color key="backgroundColor" red="1" green="0.47385590589999999" blue="0.17173047159999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                        <state key="normal" title="打开系统相册">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="openAlbum:" destination="KGU-Xa-sUs" eventType="touchUpInside" id="jSV-LF-5cT"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1YQ-aM-AiS">
+                                        <rect key="frame" x="0.0" y="550" width="317" height="60"/>
+                                        <color key="backgroundColor" red="0.99326091999999999" green="0.47694353820000002" blue="0.45688752269999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                        <state key="normal" title="测试">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="neV-qh-AHK" kind="modal" id="AX6-Jn-pVN"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="85" id="wrR-5U-6a0"/>
+                                    <constraint firstItem="g0A-SG-BAw" firstAttribute="height" secondItem="PqR-Fg-Tga" secondAttribute="height" id="CuR-yS-NL3"/>
+                                    <constraint firstItem="g0A-SG-BAw" firstAttribute="height" secondItem="UB7-g0-pBv" secondAttribute="height" id="Fsz-zR-RjQ"/>
+                                    <constraint firstItem="Kcx-O3-CE7" firstAttribute="height" secondItem="UB7-g0-pBv" secondAttribute="height" id="LIF-Wh-u5R"/>
+                                    <constraint firstItem="g0A-SG-BAw" firstAttribute="width" secondItem="PqR-Fg-Tga" secondAttribute="width" id="QJu-NR-jqX"/>
+                                    <constraint firstItem="jCQ-pA-rfA" firstAttribute="height" secondItem="1YQ-aM-AiS" secondAttribute="height" id="Vmp-qq-2uY"/>
+                                    <constraint firstItem="jCQ-pA-rfA" firstAttribute="height" secondItem="g0A-SG-BAw" secondAttribute="height" id="eTE-Hp-cEu"/>
+                                    <constraint firstItem="Kcx-O3-CE7" firstAttribute="width" secondItem="UB7-g0-pBv" secondAttribute="width" id="g7l-cl-EDT"/>
+                                    <constraint firstItem="jCQ-pA-rfA" firstAttribute="width" secondItem="1YQ-aM-AiS" secondAttribute="width" id="uLj-LU-IrK"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="加载网络图片（自定义控件）">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                </state>
-                                <connections>
-                                    <segue destination="5ga-iR-OJt" kind="modal" id="bSe-8M-SPB"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jCQ-pA-rfA">
-                                <rect key="frame" x="29" y="481.66666666666674" width="317" height="85"/>
-                                <color key="backgroundColor" red="0.99326091999999999" green="0.47694353820000002" blue="0.45688752269999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <state key="normal" title="本地网络混合加载">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                </state>
-                                <connections>
-                                    <segue destination="4oE-1J-99V" kind="modal" id="1n6-sf-kAn"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g0A-SG-BAw">
-                                <rect key="frame" x="29" y="119" width="317" height="85"/>
-                                <color key="backgroundColor" red="1" green="0.47385590591380322" blue="0.17173047157878041" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <state key="normal" title="🔍美食搜索">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                </state>
-                                <connections>
-                                    <segue destination="BYZ-38-t0r" kind="modal" id="xUB-P6-jMn"/>
-                                </connections>
-                            </button>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="g0A-SG-BAw" firstAttribute="top" secondItem="Ng1-kn-sOx" secondAttribute="top" constant="75" id="1Fv-AY-LxP"/>
-                            <constraint firstItem="PqR-Fg-Tga" firstAttribute="height" secondItem="UB7-g0-pBv" secondAttribute="height" id="3ua-QX-aBb"/>
-                            <constraint firstItem="1YQ-aM-AiS" firstAttribute="width" secondItem="UB7-g0-pBv" secondAttribute="width" id="8M1-G4-RHm"/>
-                            <constraint firstItem="UB7-g0-pBv" firstAttribute="centerY" secondItem="oLg-vd-4pY" secondAttribute="centerY" id="8QB-Fc-XKz"/>
-                            <constraint firstItem="jCQ-pA-rfA" firstAttribute="height" secondItem="1YQ-aM-AiS" secondAttribute="height" id="B8J-9G-rSR"/>
-                            <constraint firstItem="Ng1-kn-sOx" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jCQ-pA-rfA" secondAttribute="trailing" symbolic="YES" id="CZC-NL-eOK"/>
-                            <constraint firstItem="PqR-Fg-Tga" firstAttribute="width" secondItem="UB7-g0-pBv" secondAttribute="width" id="FDt-kb-Zay"/>
-                            <constraint firstItem="Ng1-kn-sOx" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="PqR-Fg-Tga" secondAttribute="trailing" symbolic="YES" id="J8X-66-R1d"/>
-                            <constraint firstItem="Ng1-kn-sOx" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="g0A-SG-BAw" secondAttribute="trailing" symbolic="YES" id="K4p-5X-DgJ"/>
-                            <constraint firstItem="jCQ-pA-rfA" firstAttribute="leading" secondItem="UB7-g0-pBv" secondAttribute="leading" id="MLg-JJ-swT"/>
-                            <constraint firstItem="PqR-Fg-Tga" firstAttribute="leading" secondItem="UB7-g0-pBv" secondAttribute="leading" id="ODr-4z-0k2"/>
-                            <constraint firstItem="g0A-SG-BAw" firstAttribute="height" secondItem="PqR-Fg-Tga" secondAttribute="height" id="OFp-Ra-fLn"/>
-                            <constraint firstItem="jCQ-pA-rfA" firstAttribute="top" secondItem="UB7-g0-pBv" secondAttribute="bottom" constant="33" id="T1j-Bj-rD9"/>
-                            <constraint firstItem="UB7-g0-pBv" firstAttribute="centerX" secondItem="oLg-vd-4pY" secondAttribute="centerX" id="T70-Tm-YZZ"/>
-                            <constraint firstItem="g0A-SG-BAw" firstAttribute="width" secondItem="PqR-Fg-Tga" secondAttribute="width" id="TZo-gV-40Y"/>
-                            <constraint firstItem="PqR-Fg-Tga" firstAttribute="top" secondItem="g0A-SG-BAw" secondAttribute="bottom" constant="41" id="U9k-cQ-Exo"/>
-                            <constraint firstItem="1YQ-aM-AiS" firstAttribute="top" secondItem="jCQ-pA-rfA" secondAttribute="bottom" constant="33" id="USa-pu-Ple"/>
-                            <constraint firstItem="1YQ-aM-AiS" firstAttribute="leading" secondItem="jCQ-pA-rfA" secondAttribute="leading" id="edN-Dd-pON"/>
-                            <constraint firstItem="Ng1-kn-sOx" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1YQ-aM-AiS" secondAttribute="trailing" symbolic="YES" id="g06-7x-q9i"/>
-                            <constraint firstItem="jCQ-pA-rfA" firstAttribute="width" secondItem="1YQ-aM-AiS" secondAttribute="width" id="hwd-CL-DEP"/>
-                            <constraint firstItem="g0A-SG-BAw" firstAttribute="leading" secondItem="PqR-Fg-Tga" secondAttribute="leading" id="pXp-JB-Y7v"/>
-                            <constraint firstItem="1YQ-aM-AiS" firstAttribute="height" secondItem="UB7-g0-pBv" secondAttribute="height" id="qOX-wv-ows"/>
+                            <constraint firstItem="a6k-HP-cDa" firstAttribute="centerX" secondItem="oLg-vd-4pY" secondAttribute="centerX" id="uHR-ot-ljW"/>
+                            <constraint firstItem="a6k-HP-cDa" firstAttribute="centerY" secondItem="oLg-vd-4pY" secondAttribute="centerY" id="wHA-ld-o7f"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ng1-kn-sOx"/>
                     </view>

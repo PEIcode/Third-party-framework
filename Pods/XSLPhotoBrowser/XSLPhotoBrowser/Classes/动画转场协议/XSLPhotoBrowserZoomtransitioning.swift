@@ -63,7 +63,6 @@ open class XSLPhotoBrowserZoomtransitioning: XSLPhotoBrowserTransitioning {
         weak var `self` = self
         presentingAnimator = XSLPhotoBrowserZoomPresentingAnimator(zoomView: { () -> UIView? in
             guard let `self` = self else {
-                print("JXPhotoBrowser.Transitioning.Zoom 已被释放.")
                 return nil
             }
             let view = UIImageView(image: self.browser?.transitionImage)

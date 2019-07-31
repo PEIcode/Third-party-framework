@@ -10,7 +10,41 @@ import UIKit
 
 class TestViewController: UIViewController {
 
+    var sourceObject: AnyObject?
+
+//    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+//        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+//    }
+//    init(ob: AnyObject?) {
+//        self.sourceObject = ob
+//        super.init(nibName: nil, bundle: nil)
+//    }
+//
+//    convenience init() {
+//        self.init(nibName: "TestViewController", bundle: nil)
+//    }
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+
+
     @IBAction func bottomBtnClick(_ sender: UIButton) {
+        //            UIFeedbackGenerator
+        //            UIImpactFeedbackGenerator
+        //            UISelectionFeedbackGenerator
+        //            UINotificationFeedbackGenerator
+        //            let feedbackGenerator = UISelectionFeedbackGenerator()
+        //            feedbackGenerator.selectionChanged()
+
+        // UINotificationFeedbackGenerator is used to give user feedback when an notification is displayed
+        //            let feedbackGenerator = UINotificationFeedbackGenerator()
+        //
+        //            feedbackGenerator.notificationOccurred(.success)
+        if #available(iOS 10.0, *) {
+            let feedbackGenerator = UIImpactFeedbackGenerator(style: .medium)
+            feedbackGenerator.impactOccurred()
+        }
+
         print("123123")
     }
     @IBAction func quitBtn(_ sender: UIButton) {

@@ -7,6 +7,12 @@
 //
 
 import UIKit
+import SDWebImage
+
+public enum AnimationType {
+    case fade
+    case zoom
+}
 
 open class XSLPhotoBrowser: UIViewController {
     /// 传入图片的index
@@ -25,7 +31,17 @@ open class XSLPhotoBrowser: UIViewController {
     public var delegate: XSLPhotoBrowserBaseDelegate
 
     /// UIViewController 转场动画协议
-    var transDelegate: XSLPhotoBrowserTransitioningDelegate
+    var transDelegate: XSLPhotoBrowserTransitioningDelegate?
+
+    init(pageIndex: Int, dataSource: XSLPhotoBrowserBaseDataSource, delegate: XSLPhotoBrowserBaseDelegate = XSLPhotoBrowserDelegate()) {
+        self.dataSource = dataSource
+        self.delegate = delegate
+        super.init(nibName: nil, bundle: nil)
+
+        dataSource.browser = self
+        delegate.browser = self
+    }
+
 
 
     /// 返回正在执行转场动画的image
@@ -74,9 +90,52 @@ open class XSLPhotoBrowser: UIViewController {
         dataSource.browser = self
         delegate.browser = self
         transDelegate.browser = self
+        SDWebImageManager.shared().imageCache?.clearMemory()
+        SDWebImageManager.shared().imageCache?.clearDisk(onCompletion: {})
+
+    }
+    
+    init(pageIndex: Int, dataSource:XSLPhotoBrowserBaseDataSource, delegate: XSLPhotoBrowserBaseDelegate = XSLPhotoBrowserDelegate(), animation: AnimationType) {
+        self.pageIndex = pageIndex
+        self.dataSource = dataSource
+        self.delegate = delegate
+        //liu
+        self.transDelegate = XSLPhotoBrowserFadeTransitioning()
+
+        super.init(nibName: nil, bundle: nil)
+        self.modalPresentationStyle = .custom
+
+
+        dataSource.browser = self
+        delegate.browser = self
+
+//        transDelegate.browser = self
+
     }
 
+//    public init(pageIndex: Int, dataSource: XSLPhotoBrowserBaseDataSource, delegate: XSLPhotoBrowserBaseDelegate = XSLPhotoBrowserDelegate(), animationType: AnimationType = .fade) {
+//        self.pageIndex = pageIndex
+//        self.dataSource = dataSource
+//        self.delegate = delegate
+////        switch animationType {
+////        case .zoom:
+//////            self.transDelegate = XSLPhotoBrowserZoomtransitioning()
+////        default:
+////            self.transDelegate = XSLPhotoBrowserFadeTransitioning()
+////        }
+//
+//
+//        super.init(nibName: nil, bundle: nil)
+//        self.modalPresentationStyle = .custom
+//        self.transitioningDelegate = transDelegate
+//
+//        dataSource.browser = self
+//        delegate.browser = self
+//        transDelegate.browser = self
+//    }
+
     public func show() {
+//        UIViewController.
         UIViewController.xsl.topMost?.present(self, animated: true, completion: nil)
     }
     required public init?(coder aDecoder: NSCoder) {
