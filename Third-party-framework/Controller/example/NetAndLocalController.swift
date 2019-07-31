@@ -69,44 +69,36 @@ class NetAndLocalController: UIViewController, UICollectionViewDelegate, UIColle
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let dataSource = XSLFinalDataSource(numberOfItems: imgArray.count, localImageCallback: { (index) -> UIImage? in
-            let str = self.imgArray[index]
-            return UIImage(named: str)
-        }, netWorkImageCallback: { (index) -> String? in
-            return self.imgArray[index]
-        }, placeholderImageCallback: { (index) -> UIImage? in
-            return UIImage(named: "placeholder")
-        })
-
-//        let dataSource = XSLFinalDataSource(numberOfItems: imgArray.count, placeholder:
-//        { (index) -> UIImage? in
+        
+//        let dataSource = XSLFinalDataSource(numberOfItems: imgArray.count, localImageCallback: { (index) -> UIImage? in
 //            let str = self.imgArray[index]
 //            return UIImage(named: str)
-//        }, urlCallback: { (index) -> String? in
+//        }, netWorkImageCallback: { (index) -> String? in
 //            return self.imgArray[index]
+//        }, placeholderImageCallback: { (index) -> UIImage? in
+//            return UIImage(named: "placeholder")
 //        })
-        let delegate = XSLPhotoBrowserAssembler()
-        //        delegate.longPressedCallback
-        delegate.longPressedCallback = { (browser, index, image, gesture) in
-            print(index)
-        }
-        delegate.moreBtnClick()
-        delegate.deleteBtnCallback = {
-            [weak self] (index) in
-            self?.imgArray.remove(at: index)
-            self?.collectionV.reloadData()
-            //            delegate.browser?.reloadData()
-        }
-        //        delegate.bottomView.addSubview()
-        //        let transDelegate = XSLPhotoBrowserZoomtransitioning(transView: collectionView.cellForItem(at: indexPath)!)
-        //需要传 对应的view对象，拿到 起始frame 结束时的frame（就是最后呈现的cell的imageView的frame）
-        let transDelegate = XSLPhotoBrowserZoomtransitioning { (browser, index, view) -> UIView? in
-            let indexP = IndexPath(item: index, section: 0)
-            return collectionView.cellForItem(at: indexP)
-        }
-        let browser = XSLPhotoBrowser(pageIndex: indexPath.item, dataSource: dataSource, transDelegate: transDelegate)
-
-        browser.show()
+//
+//        let delegate = XSLPhotoBrowserAssembler()
+//        //        delegate.longPressedCallback
+//        delegate.longPressedCallback = { (browser, index, image, gesture) in
+//            print(index)
+//        }
+//        delegate.moreBtnClick()
+//        delegate.deleteBtnCallback = {
+//            [weak self] (index) in
+//            self?.imgArray.remove(at: index)
+//            self?.collectionV.reloadData()
+//        }
+//
+//        //需要传 对应的view对象，拿到 起始frame 结束时的frame（就是最后呈现的cell的imageView的frame）
+//        let transDelegate = XSLPhotoBrowserZoomtransitioning { (browser, index, view) -> UIView? in
+//            let indexP = IndexPath(item: index, section: 0)
+//            return collectionView.cellForItem(at: indexP)
+//        }
+//        let browser = XSLPhotoBrowser(pageIndex: indexPath.item, dataSource: dataSource, transDelegate: transDelegate)
+//
+//        browser.show()
 
     }
     override func viewWillDisappear(_ animated: Bool) {

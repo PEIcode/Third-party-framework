@@ -113,8 +113,4 @@ open class XSLPhotoBrowserAssembler: XSLPhotoBrowserDelegate {
         deleteBtnCallback?(browser?.pageIndex ?? 0)
         browser?.reloadData()
     }
-
-    open override func photoBrowser(_ browser: XSLPhotoBrowser, pageIndexDidChanged pageIndex: Int) {
-        super.photoBrowser(browser, pageIndexDidChanged: pageIndex)
-    }
 }

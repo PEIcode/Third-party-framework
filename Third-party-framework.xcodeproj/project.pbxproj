@@ -21,7 +21,6 @@
 		39507C8D21CBA5B100E3B5FF /* NetWorkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39507C8C21CBA5B100E3B5FF /* NetWorkController.swift */; };
 		39507C8F21CBAD0500E3B5FF /* Photos.plist in Resources */ = {isa = PBXBuildFile; fileRef = 39507C8E21CBAD0500E3B5FF /* Photos.plist */; };
 		39507C9121CCA3C500E3B5FF /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39507C9021CCA3C500E3B5FF /* TestViewController.swift */; };
-		3954023721F6F07400948FE7 /* XSLFinalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3954023621F6F07400948FE7 /* XSLFinalDataSource.swift */; };
 		396FE46122F172A000671C3A /* HeroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396FE46022F172A000671C3A /* HeroViewController.swift */; };
 		398F284821F030D900DDBBE2 /* NetAndLocalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398F284721F030D900DDBBE2 /* NetAndLocalController.swift */; };
 		398F284A21F0315500DDBBE2 /* NetAndLocal.plist in Resources */ = {isa = PBXBuildFile; fileRef = 398F284921F0315500DDBBE2 /* NetAndLocal.plist */; };
@@ -541,7 +540,6 @@
 				39F1510B215F66DC0009F729 /* DetailModel.swift in Sources */,
 				39F15109215F5A5A0009F729 /* DetailSearchViewModel.swift in Sources */,
 				39E0B0422177250300ACAD39 /* BrowseViewController.swift in Sources */,
-				3954023721F6F07400948FE7 /* XSLFinalDataSource.swift in Sources */,
 				39507C8B21CB9ED000E3B5FF /* LocalCell.swift in Sources */,
 				39F15106215F2BB90009F729 /* PSStepCell.swift in Sources */,
 				39E9B70E22E71440002B0676 /* XSLTransitionTool.swift in Sources */,

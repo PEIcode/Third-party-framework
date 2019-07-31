@@ -1,14 +1,15 @@
 //
-//  XSLNetWorkImageDataSource.swift
-//  Third-party-framework
+//  XSLDataSource.swift
+//  XSLPhotoBrowser
 //
-//  Created by 廖佩志 on 2018/12/6.
-//  Copyright © 2018 廖佩志. All rights reserved.
+//  Created by 廖佩志 on 2019/7/18.
+//  Copyright © 2019 廖佩志. All rights reserved.
 //
 
 import UIKit
+import SDWebImage
 
-open class XSLNetWorkImageDataSource: NSObject, XSLPhotoBrowserBaseDataSource {
+class XSLPhotoBrowserDataSource: NSObject, XSLPhotoBrowserBaseDataSource {
     /// 弱引用 PhotoBrowser
     weak public var browser: XSLPhotoBrowser?
     let cellID = "XSLPhotoBrowserNetWorkCell"
@@ -16,10 +17,10 @@ open class XSLNetWorkImageDataSource: NSObject, XSLPhotoBrowserBaseDataSource {
     public var numberOfItems: Int
 
     /// 每一项的图片对象
-    public var placehodleImageCallback: (Int) -> UIImage?
+    public var placehodleImageCallback: (_ index: Int) -> UIImage?
 
     /// 每一项的图片的URL
-    public var loadURLImageCallback: (Int) -> String?
+    public var loadURLImageCallback: (_ index: Int) -> String?
 
 
     public init(numberOfItems: Int, placeholder: @escaping (Int) -> UIImage?, urlCallback: @escaping (Int) -> String?) {
@@ -27,14 +28,20 @@ open class XSLNetWorkImageDataSource: NSObject, XSLPhotoBrowserBaseDataSource {
         self.placehodleImageCallback = placeholder
         self.loadURLImageCallback = urlCallback
     }
-
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return numberOfItems
     }
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! XSLPhotoBrowserNetWorkCell
-        cell.reloadData(placeholder: placehodleImageCallback(indexPath.item), autoloadURLString: loadURLImageCallback(indexPath.item))
+        let str = loadURLImageCallback(indexPath.item)
+        let placeholder = placehodleImageCallback(indexPath.item)
+        if str?.hasPrefix("http") ?? false {
+            cell.reloadData(placeholder: placeholder, autoloadURLString: str)
+            return cell
+        }
+        cell.imageView.image = UIImage(named: str ?? "")
+        cell.progressView.isHidden = true
         return cell
     }
 

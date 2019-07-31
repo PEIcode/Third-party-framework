@@ -7,10 +7,10 @@ target 'Third-party-framework' do
   pod 'Alamofire' 
   pod 'SwiftyJSON'
   pod 'Kingfisher'
-  pod 'SDWebImage'	
+  pod 'SDWebImage', '~> 4.4.6'
   pod 'FLAnimatedImage'
   pod 'SnapKit', '~> 4.0.0'
-  pod 'XSLPhotoBrowser', '~> 0.1.0'
+  pod 'XSLPhotoBrowser', '~> 0.3.0'
   pod 'Hero'
   target 'Third-party-frameworkTests' do
     inherit! :search_paths

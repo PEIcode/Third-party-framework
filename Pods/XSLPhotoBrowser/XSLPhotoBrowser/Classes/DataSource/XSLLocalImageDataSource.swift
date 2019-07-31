@@ -31,6 +31,9 @@ open class XSLLocalImageDataSource: NSObject, XSLPhotoBrowserBaseDataSource {
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! XSLBaseCollectionViewCell
         cell.imageView.image = localImageCallback(indexPath.item)
+//        cell.imageView.hero.isEnabled = true
+        cell.hero.id = "XSLPhotoBrowser"
+//        cell.contentView.hero.modifiers = [.arc()]
         return cell
     }
 }

@@ -3,24 +3,24 @@ PODS:
   - FLAnimatedImage (1.0.12)
   - Hero (1.4.0)
   - Kingfisher (4.9.0)
-  - SDWebImage (4.4.2):
-    - SDWebImage/Core (= 4.4.2)
-  - SDWebImage/Core (4.4.2)
+  - SDWebImage (4.4.7):
+    - SDWebImage/Core (= 4.4.7)
+  - SDWebImage/Core (4.4.7)
   - SnapKit (4.0.0)
   - SwiftyJSON (4.1.0)
-  - XSLPhotoBrowser (0.1.0):
-    - Kingfisher
-    - SDWebImage
+  - XSLPhotoBrowser (0.3.0):
+    - Hero
+    - SDWebImage (~> 4.4.6)
 
 DEPENDENCIES:
   - Alamofire
   - FLAnimatedImage
   - Hero
   - Kingfisher
-  - SDWebImage
+  - SDWebImage (~> 4.4.6)
   - SnapKit (~> 4.0.0)
   - SwiftyJSON
-  - XSLPhotoBrowser (~> 0.1.0)
+  - XSLPhotoBrowser (~> 0.3.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -38,11 +38,11 @@ SPEC CHECKSUMS:
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   Hero: bac92350d7201a1a940003e0767c7b52ce7c99a1
   Kingfisher: 64539b51826b778206daa6ed815d12653caa69dd
-  SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
+  SDWebImage: c10d14a8883ebd89664f02a422006f66a85c0c5d
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
-  XSLPhotoBrowser: 74f284b12f5bc35d8443228f71c5c600be221697
+  XSLPhotoBrowser: 3841caafcc92773449bf5e9e5340fd65472a3b62
 
-PODFILE CHECKSUM: 9afb5c287d22234ff25a65a52a80c612f2fe5b78
+PODFILE CHECKSUM: 0ef0d946947059f5197a44ad549c8abb70aa1385
 
 COCOAPODS: 1.7.5

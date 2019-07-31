@@ -1,13 +1,12 @@
 //
 //  XSLFinalDataSource.swift
-//  Third-party-framework
+//  XSLPhotoBrowser
 //
-//  Created by 廖佩志 on 2019/1/22.
+//  Created by 廖佩志 on 2019/7/24.
 //  Copyright © 2019 廖佩志. All rights reserved.
 //
 
 import UIKit
-import XSLPhotoBrowser
 
 class XSLFinalDataSource: NSObject, XSLPhotoBrowserBaseDataSource {
     /// 弱引用 PhotoBrowser
@@ -25,11 +24,6 @@ class XSLFinalDataSource: NSObject, XSLPhotoBrowserBaseDataSource {
     /// 每一项的图片的URL
     public var netWorkImageCallback: (_ index: Int) -> String?
 
-//    public init(numberOfItems: Int, placeholder: @escaping (_ index: Int) -> UIImage?, urlCallback: @escaping (_ index: Int) -> String?) {
-//        self.numberOfItems = numberOfItems
-//        self.placehodleImageCallback = placeholder
-//        self.loadURLImageCallback = urlCallback
-//    }
     public init(numberOfItems: Int, localImageCallback: @escaping (_ index: Int) -> UIImage?, netWorkImageCallback: @escaping(_ index: Int) -> String?, placeholderImageCallback: @escaping(_ index: Int) -> UIImage?) {
         self.numberOfItems = numberOfItems
         self.localImageCallback = localImageCallback
@@ -53,7 +47,6 @@ class XSLFinalDataSource: NSObject, XSLPhotoBrowserBaseDataSource {
             cell.progressView.isHidden = false
             cell.reloadData(placeholder: placeholder, autoloadURLString: urlString)
         }
-        cell.contentView.hero.id = "XSLPhotoBrowserNetWorkCell\(indexPath.item)"
         return cell
     }
 

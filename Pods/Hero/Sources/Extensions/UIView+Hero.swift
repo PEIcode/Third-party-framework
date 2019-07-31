@@ -83,7 +83,7 @@ public extension HeroExtension where Base: UIView {
   /**
    **modifierString** provides another way to set **modifiers**. It can be assigned through storyboard.
    */
-  public var modifierString: String? {
+    var modifierString: String? {
     get { fatalError("Reverse lookup is not supported") }
     set { modifiers = newValue?.parse() }
   }

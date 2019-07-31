@@ -74,28 +74,15 @@ class NetWorkController: UIViewController, UICollectionViewDelegate, UICollectio
 //            return self.imgArray[index]
 //        }
 
-        let dataSource = XSLFinalDataSource(numberOfItems: imgArray.count, localImageCallback:{ _ in
-            return nil
-        }, netWorkImageCallback: { (index) -> String? in
-            return self.imgArray[index]
-        }) { (index) -> UIImage? in
-            return UIImage(named: "placeholderImg")
-        }
-
-//        let dataSource = XSLNetWorkImageDataSource(numberOfItems: { () -> Int in
-//            return self.imgArray.count
-//        }(), placeholder: { (Int) -> UIImage? in
-//
-//            let cell = collectionView.cellForItem(at: indexPath) as? LocalCell
-//            return cell?.imageView.image
-//        }, urlCallback: { (index) -> String? in
+//        let dataSource = XSLFinalDataSource(numberOfItems: imgArray.count, localImageCallback:{ _ in
+//            return nil
+//        }, netWorkImageCallback: { (index) -> String? in
 //            return self.imgArray[index]
-//        })
-//        let dataSource = XSLNetWorkImageDataSource(numberOfItems: imgArray.count, placeholder: { (index) -> UIImage? in
-//
-//        }) { (index) -> String? in
-//            return self.imgArray[index]
+//        }) { (index) -> UIImage? in
+//            return UIImage(named: "placeholderImg")
 //        }
+
+
         let delegate = XSLPhotoBrowserAssembler()
 //        delegate.longPressedCallback
         delegate.longPressedCallback = { (browser, index, image, gesture) in
@@ -118,12 +105,12 @@ class NetWorkController: UIViewController, UICollectionViewDelegate, UICollectio
 //        delegate.bottomView.addSubview()
         //        let transDelegate = XSLPhotoBrowserZoomtransitioning(transView: collectionView.cellForItem(at: indexPath)!)
         //需要传 对应的view对象，拿到 起始frame 结束时的frame（就是最后呈现的cell的imageView的frame）
-        let transDelegate = XSLPhotoBrowserZoomtransitioning { (browser, index, view) -> UIView? in
-            let indexP = IndexPath(item: index, section: 0)
-            return collectionView.cellForItem(at: indexP)
-        }
-        let browser = XSLPhotoBrowser(pageIndex: indexPath.item, dataSource: dataSource, delegate: delegate, transDelegate: transDelegate)
-        browser.show()
+//        let transDelegate = XSLPhotoBrowserZoomtransitioning { (browser, index, view) -> UIView? in
+//            let indexP = IndexPath(item: index, section: 0)
+//            return collectionView.cellForItem(at: indexP)
+//        }
+//        let browser = XSLPhotoBrowser(pageIndex: indexPath.item, dataSource: dataSource, delegate: delegate, transDelegate: transDelegate)
+//        browser.show()
     }
 
 }

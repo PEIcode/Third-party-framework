@@ -15,6 +15,7 @@ open class XSLPhotoBrowserNetWorkCell: XSLBaseCollectionViewCell {
     /// 初始化
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        contentView.backgroundColor = .black
         contentView.addSubview(progressView)
     }
 
@@ -33,7 +34,9 @@ open class XSLPhotoBrowserNetWorkCell: XSLBaseCollectionViewCell {
     }
     /// 刷新数据
     open func reloadData(placeholder: UIImage?, autoloadURLString: String?) {
-         progressView.isHidden = true
+        // 重置环境
+        progressView.isHidden = true
+        progressView.progress = 0
         // url是否有效
         guard let urlString = autoloadURLString,let url = URL(string: urlString) else {
             imageView.image = placeholder
@@ -41,25 +44,21 @@ open class XSLPhotoBrowserNetWorkCell: XSLBaseCollectionViewCell {
             return
         }
         // 取缓存
-        let image = photoLoader.imageCached(on: imageView, url: url)
+        let image = photoLoader.imageCached(url: url)
         let placeholder = image ?? placeholder
-        // 重置环境
-        progressView.isHidden = false
-        progressView.progress = 0
         // 加载
         photoLoader.setImage(on: self.imageView, url: url, placeholder: placeholder, progressBlock: {
             [weak self] (receivedSize, totalSize) in
-            if totalSize > 0 {
-                DispatchQueue.main.async {
-//                    self?.progressView.isHidden = false
-                    self?.progressView.progress = CGFloat(receivedSize) / CGFloat(totalSize)
+                if totalSize > 0 {
+                    DispatchQueue.main.async {
+                        self?.progressView.isHidden = false
+                        self?.progressView.progress = CGFloat(receivedSize) / CGFloat(totalSize)
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self?.progressView.progress = 0
+                    }
                 }
-            } else {
-                DispatchQueue.main.async {
-                    self?.progressView.progress = 0
-                }
-            }
-
             }, completionHandler: { [weak self] in
                 self?.progressView.isHidden = true
                 self?.setNeedsLayout()

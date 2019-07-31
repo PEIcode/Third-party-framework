@@ -8,10 +8,7 @@
 
 import UIKit
 import Foundation
-//public enum TransitionType {
-//    case fade
-//    case zoom
-//}
+
 open class XSLPhotoBrowserTransitioning: NSObject, XSLPhotoBrowserTransitioningDelegate {
     weak public var browser: XSLPhotoBrowser?
 
@@ -23,10 +20,6 @@ open class XSLPhotoBrowserTransitioning: NSObject, XSLPhotoBrowserTransitioningD
             return presentVC?.maskView.alpha ?? 0
         }
     }
-//    public var type: TransitionType = .fade
-//    init(transitionType: TransitionType?) {
-//        self.type = transitionType ?? .fade
-//    }
     // presentd转场动画方法
     open var presentingAnimator: UIViewControllerAnimatedTransitioning?
     // dismiss转场动画方法

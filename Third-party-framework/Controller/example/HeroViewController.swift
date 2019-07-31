@@ -8,21 +8,47 @@
 
 import UIKit
 import Hero
-private let reuseIdentifier = "Cell"
+private let reuseIdentifier = "HeroCell"
 
-class HeroViewController: UICollectionViewController {
+class HeroViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
-    private let photoSpacing = 8
+    private let photoSpacing: CGFloat = 8.0
 
-    var pageCounts: Int
+    var pageCounts: Int?
+    var currentIndex: Int
 
-    init(pageCounts: Int) {
-
-        self.pageCounts = pageCounts
+    lazy var flowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         layout.scrollDirection = .horizontal
-        super.init(collectionViewLayout: layout)
+        layout.minimumLineSpacing = photoSpacing
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        return layout
+    }()
+
+    lazy var collectionView: UICollectionView = {
+        let collectionV = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        //        collectionV.backgroundColor = UIColor.clear
+        collectionV.showsVerticalScrollIndicator = false
+        collectionV.showsHorizontalScrollIndicator = false
+        collectionV.isPagingEnabled = true
+        collectionV.alwaysBounceVertical = false
+        collectionV.delegate = self
+        collectionV.dataSource = self
+        collectionV.frame = view.bounds
+        collectionV.frame.size.width = view.bounds.width + photoSpacing
+        collectionV.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: photoSpacing)
+        collectionV.register(LocalCell.self, forCellWithReuseIdentifier: "HeroCell")
+        return collectionV
+    }()
+
+
+    init(currentIndex: Int) {
+        self.currentIndex = currentIndex
+//        let layout = UICollectionViewFlowLayout()
+//        layout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+//        layout.scrollDirection = .horizontal
+//        layout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        super.init(nibName: nil, bundle: nil)
         self.hero.isEnabled = true
 
     }
@@ -32,84 +58,42 @@ class HeroViewController: UICollectionViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.hero.isEnabled = true
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
+//        collectionView?.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        collectionView.scrollToItem(at: IndexPath(item: currentIndex, section: 0), at: .left, animated: true)
+        view.addSubview(collectionView)
         // Do any additional setup after loading the view.
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
     // MARK: UICollectionViewDataSource
 
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
 
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return pageCounts
+        return 4
     }
 
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        // Configure the cell
-        let imgV = UIImageView(image: UIImage(named: "pic\(indexPath.item + 1)"))
-        imgV.frame = CGRect(x: 0, y: 0, width: cell.bounds.width, height: 300)
-        imgV.center = cell.center
-        cell.contentView.addSubview(imgV)
-        cell.contentView.hero.id = "hero\(indexPath.item)"
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LocalCell
+        cell.imageView.image = UIImage(named: "pic\(indexPath.item+1)")
+        cell.imageView.contentMode = .scaleAspectFit
+        cell.imageView.hero.id = "hero\(indexPath.item)"
+        cell.imageView.hero.modifiers = [.forceAnimate]
         return cell
     }
 
 
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         dismiss(animated: true, completion: nil)
     }
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
 
 }

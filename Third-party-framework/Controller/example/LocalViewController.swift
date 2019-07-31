@@ -37,13 +37,14 @@ class LocalViewController: UIViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hero.isEnabled = true
+
         let top = navigationController?.navigationBar.frame.origin.y
         let backBtn = UIButton(frame: CGRect(x: 0, y: top ?? 44, width: 80, height: 30))
         backBtn.backgroundColor = .gray
         backBtn.setTitle("BACK", for: .normal)
         view.addSubview(backBtn)
         backBtn.addTarget(self, action: #selector(backClick), for: .touchDown)
-
         collectionV.frame = CGRect(x: 0, y: 80, width: view.bounds.width, height: view.bounds.height - 30)
         collectionV.delegate = self
         collectionV.dataSource = self
@@ -66,26 +67,27 @@ extension LocalViewController: UICollectionViewDelegate, UICollectionViewDataSou
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! LocalCell
-        cell.imageView.image = UIImage.init(named: imgArray[indexPath.item])
-        cell.contentView.hero.id = "hero\(indexPath.item)"
+        cell.imageView.image = UIImage(named: imgArray[indexPath.item])
+//        cell.hero.id = "XSLPhotoBrowser"
+        cell.imageView.hero.id = "hero\(indexPath.item)"
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let dataSource = XSLFinalDataSource(numberOfItems: imgArray.count, placeholder: { (index) -> UIImage? in
-//            let str = self.imgArray[index]
-//            return UIImage(named: str)
-//        }) { [weak self] (index) -> String? in
-//            return self?.imgArray[index]
-//        }
 
+        let dataSource = XSLLocalImageDataSource(numberOfItems: { () -> Int in
+            return self.imgArray.count
+        }) { (index) -> UIImage? in
+            return UIImage(named: self.imgArray[index])
+        }
 //        let dataSource = XSLFinalDataSource(numberOfItems: imgArray.count, localImageCallback: { (index) -> UIImage? in
 //            let str = self.imgArray[index]
 //            return UIImage(named: str)
 //        }, netWorkImageCallback: {_ in return nil}, placeholderImageCallback: {_ in
 //            return nil
 //        })
-//        let browser = XSLPhotoBrowser(pageIndex: indexPath.item, dataSource: dataSource)
+//        let browser = XSLPhotoBrowser(currentIndex: indexPath.item, dataSource: dataSource)
+//        browser.hero.isEnabled = true
 //        browser.show()
 
         /// 使用sourceobject
@@ -94,7 +96,7 @@ extension LocalViewController: UICollectionViewDelegate, UICollectionViewDataSou
 //        present(b, animated: true, completion: nil)
 
         //    使用Hero
-        let heroVC = HeroViewController(pageCounts: 4)
+        let heroVC = HeroViewController(currentIndex: indexPath.item)
         present(heroVC, animated: true, completion: nil)
     }
 
